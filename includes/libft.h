@@ -6,13 +6,16 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:48:03 by amaligno          #+#    #+#             */
-/*   Updated: 2024/08/29 15:11:54 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:27:58 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include "sys/types.h"
+# include <sys/types.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {

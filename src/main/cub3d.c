@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/08/29 15:13:31 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:31:18 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,6 @@
 
 int	main(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 }

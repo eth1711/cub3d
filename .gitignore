@@ -2,6 +2,8 @@
 
 !*/
 !Makefile
+!*.m
+!font.xcf
 !*.c
 !*.h
 !.gitignore
