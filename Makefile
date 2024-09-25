@@ -6,20 +6,26 @@ CC = cc
 
 FLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
 
-INCLUDES = -Iincludes -Ilib/minilibx_opengl
+ifeq ($(shell uname), Linux)
+	MLX = lib/minilibx-linux
+else
+	MLX = lib/minilibx_opengl
+endif
 
-LINKER = -L./lib/Libft -L./lib/minilibx_opengl -lft -lm -lmlx
+INCLUDES = -I includes -I $(MLX)
+
+LINKER = -L./lib/Libft -L $(MLX) -lft -lm -lmlx -lXext -lX11 -lz
 
 NAME = cub3d
 
 %.o : %.c
 	@echo Compiling $<
-	@$(CC) $(FLAGS) $(INCLUDES) -static -c -o $@ $< 
+	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $< 
 
 $(NAME) : $(OBJ)
-	@make -C lib/minilibx_opengl
+	@make -C $(MLX)
 	@make -C lib/Libft
-	@$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
 
 all : $(NAME)
 	@echo $(NAME) Done !
