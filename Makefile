@@ -8,13 +8,15 @@ FLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
 
 ifeq ($(shell uname), Linux)
 	MLX = lib/minilibx-linux
+	LINKER_FLAGS = -lXext -lX11 -lz
 else
 	MLX = lib/minilibx_opengl
+	LINKER_FLAGS = -framework OpenGL -framework AppKit
 endif
 
-INCLUDES = -I includes -I $(MLX)
+INCLUDES = -I includes -I $(MLX) 
 
-LINKER = -L./lib/Libft -L $(MLX) -lft -lm -lmlx -lXext -lX11 -lz
+LINKER = -L./lib/Libft -L $(MLX) -lft -lm -lmlx $(LINKER_FLAGS)
 
 NAME = cub3d
 
