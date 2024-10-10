@@ -1,9 +1,25 @@
-*
+# Files
+cub3d
 
-!*/
-!Makefile
-!*.m
-!font.xcf
-!*.c
-!*.h
-!.gitignore
+# Filetypes
+*.o
+
+# Folders
+.vscode
+assets
+lib
+
+# ------dynamic ignoring------
+# # ignore everything
+# *
+
+# #Whitelist
+# !*/
+# !*.c
+# !*.h
+# !.gitignore
+# !Makefile
+
+# #Exceptions
+# .vscode
+# lib
