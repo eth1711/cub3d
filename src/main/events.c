@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:21 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 18:43:58 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:48:12 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	on_key_up(int key, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	// printf("key pressed: %i\n", key);
 	if (key == KEY_W)
 		data->player.m_up = false;
 	if (key == KEY_S)

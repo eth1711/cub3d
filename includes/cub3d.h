@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 18:44:47 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:33:55 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define WIN_HEIGHT 512
 # define WIN_WIDTH 1240
+# define PLAYER_SPEED 10
+# define PLAYER_SIZE 100
 
 # ifdef	__APPLE__
 
@@ -93,6 +95,16 @@ typedef struct s_data
 	t_player	player;
 }	t_data;
 
+//Main
+int		loop(void *param);
+
+//Init
+void	init(t_data *data);
+
+//Drawing
+void	draw_player(t_image *image, t_player *player);
+void	draw_background(t_image *image);
+
 //Events
 int		on_destroy(void *param);
 int		on_key_down(int key, void *param);
@@ -101,5 +113,6 @@ int		on_key_up(int key, void *param);
 //Utils
 int		create_trgb(int t, int r, int g, int b);
 void	draw_rectangle(t_image *img, t_rect rect);
+void	img_pix_put(t_image *img, int x, int y, int color);
 
 #endif
