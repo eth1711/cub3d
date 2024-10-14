@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/11 18:45:47 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:44:47 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,36 @@
 
 # include "libft.h"
 # include "math.h"
+# include <X11/keysym.h>
 # include "mlx.h"
+# include <stdio.h>
+# include <time.h>
 
 # define WIN_HEIGHT 512
 # define WIN_WIDTH 1240
 
+# ifdef	__APPLE__
+
 enum {
-	ON_DESTROY = 17
+	ON_DESTROY = 17,
+	KEY_ESC = 53,
+	KEY_W = 13,
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2
 };
+# elif __linux__
+
+enum {
+	ON_DESTROY = 17,
+	ON_KEY_DOWN = 2,
+	KEY_ESC = XK_Escape,
+	KEY_W = XK_w,
+	KEY_A = XK_a,
+	KEY_S = XK_s,
+	KEY_D = XK_d
+};
+# endif
 
 typedef struct s_vector
 {
@@ -53,17 +75,28 @@ typedef struct s_map
 	int			height;	
 }	t_map;
 
+typedef struct s_player
+{
+	t_vector	pos;
+	bool		m_up;
+	bool		m_down;
+	bool		m_left;
+	bool		m_right;
+}	t_player;
+
 typedef struct s_data
 {
 	void		*mlx;
 	void		*window;
 	t_image		image;
 	t_map		map;
-	t_vector	player;
+	t_player	player;
 }	t_data;
 
 //Events
 int		on_destroy(void *param);
+int		on_key_down(int key, void *param);
+int		on_key_up(int key, void *param);
 
 //Utils
 int		create_trgb(int t, int r, int g, int b);
