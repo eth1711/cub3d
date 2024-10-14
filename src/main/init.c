@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 19:03:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:09:34 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	init(t_data *data)
 	data->image.image = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->image.addr = mlx_get_data_addr(data->image.image, &data->image.bpp,
 			&data->image.line_len, &data->image.endian);
-	data->map.map = " \
-				1111111\n \
-				1000001\n \
-				100N001\n \
-				1111111\n \
-				";
+	data->map.map = (char *[]){"1111111\n",
+		"1000001\n",
+		"1000001\n",
+		"1111111\n"
+	};
+	// for (int y,x = 0; )
 	data->map.width = 7;
 	data->map.height = 4;
 	init_player(&data->player);

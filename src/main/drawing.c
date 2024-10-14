@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 19:37:41 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:13:27 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,30 @@ void	draw_player(t_image *image, t_player *player)
 	player_box.size.y = PLAYER_SIZE;
 	player_box.color = create_trgb(0, 255, 223, 18);
 	draw_rectangle(image, player_box);
-	img_pix_put(image, player->pos.x, player->pos.y, create_trgb(0, 255, 18, 18));
+}
+
+void	draw_map(t_image *image, t_map map)
+{
+	int		x;
+	int		y;
+	t_rect	wall;
+
+	y = 0;
+	wall.size = (t_vector){WALL_SIZE, WALL_SIZE};
+	while (y < map.height)
+	{
+		x = 0;
+		while (x < map.width)
+		{
+			if (map.map[y][x] == '1')
+				wall.color = create_trgb(0, 0, 0, 0);
+			else if (map.map[y][x] == '0')
+				wall.color = create_trgb(0, 255, 255, 255);
+			wall.pos.x = x * WALL_SIZE;
+			wall.pos.y = y;
+			draw_rectangle(image, wall);
+			x++;
+		}
+		y++;
+	}
 }
