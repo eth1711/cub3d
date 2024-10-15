@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 20:06:52 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:09:58 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include "math.h"
-# include <X11/keysym.h>
 # include "mlx.h"
+# include <math.h>
 # include <stdio.h>
 # include <time.h>
 
+#define PI 3.1415926535
+
 # define WIN_HEIGHT 512
 # define WIN_WIDTH 1024
-# define PLAYER_SPEED 10
-# define PLAYER_SIZE 10
 # define WALL_SIZE 64
+
+# define PLAYER_LOOK 0.1
+# define PLAYER_SPEED 5
+# define PLAYER_SIZE 10
 
 # ifdef	__APPLE__
 
 enum {
 	ON_DESTROY = 17,
+	ON_KEY_DOWN = 2,
 	KEY_ESC = 53,
 	KEY_W = 13,
 	KEY_A = 0,
@@ -37,6 +41,7 @@ enum {
 	KEY_D = 2
 };
 # elif __linux__
+# include <X11/keysym.h>
 
 enum {
 	ON_DESTROY = 17,
@@ -49,16 +54,22 @@ enum {
 };
 # endif
 
-typedef struct s_vector
+typedef struct s_vectori
 {
 	int	x;
 	int	y;
-}	t_vector;
+}	t_vectori;
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vectorf;
 
 typedef struct s_rect
 {
-	t_vector	size;
-	t_vector	pos;
+	t_vectori	size;
+	t_vectori	pos;
 	int			color;
 }	t_rect;
 
@@ -80,7 +91,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_vector	pos;
+	t_vectori	pos;
+	t_vectorf	delta;
+	float		angle;
 	bool		m_up;
 	bool		m_down;
 	bool		m_left;

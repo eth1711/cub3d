@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/14 20:14:59 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:09:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,32 @@
 
 void	move_handler(t_player *player)
 {
-	if (player->m_up && player->pos.y - (PLAYER_SPEED + PLAYER_SIZE / 2) >= 0)
-		player->pos.y -= PLAYER_SPEED;
-	if (player->m_down
-		&& player->pos.y + (PLAYER_SPEED + PLAYER_SIZE / 2) <= WIN_HEIGHT)
-		player->pos.y += PLAYER_SPEED;
-	if (player->m_left && player->pos.x - (PLAYER_SPEED + PLAYER_SIZE / 2) >= 0)
-		player->pos.x -= PLAYER_SPEED;
-	if (player->m_right
-		&& player->pos.x + (PLAYER_SPEED + PLAYER_SIZE / 2) <= WIN_WIDTH)
-		player->pos.x += PLAYER_SPEED;
+	if (player->m_up)
+	{
+		player->pos.y += player->delta.y;
+		player->pos.x += player->delta.x;
+	}
+	if (player->m_down)
+	{
+		player->pos.y -= player->delta.y;
+		player->pos.x -= player->delta.x;
+	}
+	if (player->m_left)
+	{
+		player->angle += PLAYER_LOOK;
+		if (player->angle > 2 * PI)
+			player->angle -= 2 * PI;
+		player->delta.x = cos(player->angle) * PLAYER_SPEED;
+		player->delta.y = sin(player->angle) * PLAYER_SPEED;
+	}
+	if (player->m_right)
+	{
+		player->angle -= PLAYER_LOOK;
+		if (player->angle < 0)
+			player->angle += 2 * PI;
+		player->delta.x = cos(player->angle) * PLAYER_SPEED;
+		player->delta.y = sin(player->angle) * PLAYER_SPEED;
+	}
 }
 
 int	loop(void *param)
@@ -46,5 +62,13 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	init(&data);
+	data.map.map = (char *[]){"1111111\n",
+		"1000001\n",
+		"1000001\n",
+		"1000001\n",
+		"1000001\n",
+		"1111111\n",
+		NULL
+	};
 	mlx_loop(data.mlx);
 }
