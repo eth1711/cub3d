@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/15 22:09:58 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:30:07 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,6 @@ int		on_key_up(int key, void *param);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_rectangle(t_image *img, t_rect rect);
 void	img_pix_put(t_image *img, int x, int y, int color);
+void	draw_ray(t_image *img, t_vectori start, float angle, int color);
 
 #endif

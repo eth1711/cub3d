@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/15 22:12:21 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:31:14 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	draw_player(t_image *image, t_player *player)
 	player_box.size.x = PLAYER_SIZE;
 	player_box.size.y = PLAYER_SIZE;
 	player_box.color = create_trgb(0, 255, 223, 18);
+	draw_ray(image, player->pos, player->angle, create_trgb(0, 214, 24, 24));
 	draw_rectangle(image, player_box);
 }
 
