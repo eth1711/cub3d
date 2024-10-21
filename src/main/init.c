@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/15 21:52:20 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:50:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_player(t_player *player)
 {
 	player->pos = (t_vectori){100, 100};
 	player->delta = (t_vectorf){0, 0};
-	player->angle = PI / 2;
+	player->angle = M_PI / 2;
 	player->m_down = false;
 	player->m_left = false;
 	player->m_right = false;

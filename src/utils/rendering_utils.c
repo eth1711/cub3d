@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:09 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/15 22:29:37 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:31:25 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,17 @@ void	draw_rectangle(t_image *img, t_rect rect)
 	}
 }
 
-void	draw_ray(t_image *img, t_vectori start, float angle, int color)
+void	draw_ray(t_image *img, t_vectorf start, double angle, int color)
 {
 	int	length;
 
+	
 	length = 0;
-	while (length < 100)
+	while (length < 50)
 	{
-		start.x++;
-		start.y++;
+		start.x += cos(angle);
+		start.y += sin(angle);
 		length++;
-		img_pix_put(img, start.x * cos(angle) , start.y * sin(angle), color);
+		img_pix_put(img, round(start.x), round(start.y), color);
 	}
 }

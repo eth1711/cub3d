@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/15 22:09:43 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:25:18 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,31 @@ void	move_handler(t_player *player)
 {
 	if (player->m_up)
 	{
-		player->pos.y += player->delta.y;
-		player->pos.x += player->delta.x;
+		player->pos.y += round(player->delta.y);
+		player->pos.x += round(player->delta.x);
 	}
 	if (player->m_down)
 	{
-		player->pos.y -= player->delta.y;
-		player->pos.x -= player->delta.x;
-	}
-	if (player->m_left)
-	{
-		player->angle += PLAYER_LOOK;
-		if (player->angle > 2 * PI)
-			player->angle -= 2 * PI;
-		player->delta.x = cos(player->angle) * PLAYER_SPEED;
-		player->delta.y = sin(player->angle) * PLAYER_SPEED;
+		player->pos.y -= round(player->delta.y);
+		player->pos.x -= round(player->delta.x);
 	}
 	if (player->m_right)
 	{
-		player->angle -= PLAYER_LOOK;
-		if (player->angle < 0)
-			player->angle += 2 * PI;
+		player->angle += PLAYER_LOOK;
+		if (player->angle > M_PI * 2)
+			player->angle -= M_PI * 2;
 		player->delta.x = cos(player->angle) * PLAYER_SPEED;
 		player->delta.y = sin(player->angle) * PLAYER_SPEED;
 	}
+	if (player->m_left)
+	{
+		player->angle -= PLAYER_LOOK;
+		if (player->angle < 0)
+			player->angle += M_PI * 2;
+		player->delta.x = cos(player->angle) * PLAYER_SPEED;
+		player->delta.y = sin(player->angle) * PLAYER_SPEED;
+	}
+	printf("Player angle: %lf\n", player->angle);
 }
 
 int	loop(void *param)
