@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/21 16:25:18 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:04:57 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,30 @@
 
 void	move_handler(t_player *player)
 {
-	if (player->m_up)
+	int	sign;
+	if (player->m_up || player->m_down)
 	{
-		player->pos.y += round(player->delta.y);
-		player->pos.x += round(player->delta.x);
+		sign = 1;
+		if (player->m_down)
+			sign = -1;
+		player->pos.y += round(player->delta.y) * sign;
+		player->pos.x += round(player->delta.x) * sign;
 	}
-	if (player->m_down)
+	if (player->l_right || player->l_left)
 	{
-		player->pos.y -= round(player->delta.y);
-		player->pos.x -= round(player->delta.x);
-	}
-	if (player->m_right)
-	{
-		player->angle += PLAYER_LOOK;
+		if (player->l_right)
+			player->angle += PLAYER_LOOK;
+		else
+			player->angle -= PLAYER_LOOK;
 		if (player->angle > M_PI * 2)
 			player->angle -= M_PI * 2;
-		player->delta.x = cos(player->angle) * PLAYER_SPEED;
-		player->delta.y = sin(player->angle) * PLAYER_SPEED;
-	}
-	if (player->m_left)
-	{
-		player->angle -= PLAYER_LOOK;
-		if (player->angle < 0)
+		else if ((player->angle < 0))
 			player->angle += M_PI * 2;
 		player->delta.x = cos(player->angle) * PLAYER_SPEED;
 		player->delta.y = sin(player->angle) * PLAYER_SPEED;
 	}
 	printf("Player angle: %lf\n", player->angle);
+	printf("Player pos: (%i, %i)\n", player->pos.x, player->pos.y);
 }
 
 int	loop(void *param)
@@ -65,9 +62,9 @@ int	main(int argc, char **argv)
 	init(&data);
 	data.map.map = (char *[]){"1111111\n",
 		"1000001\n",
-		"1000001\n",
-		"1000001\n",
-		"1000001\n",
+		"100000111\n",
+		"100000101\n",
+		"100000111\n",
 		"1111111\n",
 		NULL
 	};

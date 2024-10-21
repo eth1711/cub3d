@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/21 16:28:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:05:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <stdio.h>
 # include <time.h>
 
-# define WIN_HEIGHT 512
-# define WIN_WIDTH 1024
+# define WIN_HEIGHT 1080 
+# define WIN_WIDTH 1920
 # define WALL_SIZE 64
 
-# define PLAYER_LOOK 0.1
-# define PLAYER_SPEED 5
+# define PLAYER_LOOK 0.5
+# define PLAYER_SPEED 20
 # define PLAYER_SIZE 10
 
 # ifdef	__APPLE__
@@ -48,7 +48,9 @@ enum {
 	KEY_W = XK_w,
 	KEY_A = XK_a,
 	KEY_S = XK_s,
-	KEY_D = XK_d
+	KEY_D = XK_d,
+	KEY_LEFT = XK_Left,
+	KEY_RIGHT = XK_Right
 };
 # endif
 
@@ -62,7 +64,7 @@ typedef struct s_vector
 {
 	double	x;
 	double	y;
-}	t_vectorf;
+}	t_vectord;
 
 typedef struct s_rect
 {
@@ -70,6 +72,14 @@ typedef struct s_rect
 	t_vectori	pos;
 	int			color;
 }	t_rect;
+
+typedef struct s_ray
+{
+	t_vectord	start;
+	t_vectord	end;
+	double		angle;
+	int			color;
+}	t_ray;
 
 typedef struct s_image
 {
@@ -90,12 +100,14 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_vectori	pos;
-	t_vectorf	delta;
+	t_vectord	delta;
 	double		angle;
 	bool		m_up;
 	bool		m_down;
 	bool		m_left;
 	bool		m_right;
+	bool		l_left;
+	bool		l_right;
 }	t_player;
 
 typedef struct s_data
@@ -103,6 +115,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*window;
 	t_image		image;
+	t_image		background;
 	t_map		map;
 	t_player	player;
 }	t_data;
@@ -127,6 +140,6 @@ int		on_key_up(int key, void *param);
 int		create_trgb(int t, int r, int g, int b);
 void	draw_rectangle(t_image *img, t_rect rect);
 void	img_pix_put(t_image *img, int x, int y, int color);
-void	draw_ray(t_image *img, t_vectorf start, double angle, int color);
+void	draw_ray(t_image *img, t_ray ray);
 
 #endif
