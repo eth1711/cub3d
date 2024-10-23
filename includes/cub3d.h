@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/21 21:05:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:33:15 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # define WIN_WIDTH 1920
 # define WALL_SIZE 64
 
-# define PLAYER_LOOK 0.5
-# define PLAYER_SPEED 20
-# define PLAYER_SIZE 10
+# define PLAYER_LOOK 0.1
+# define PLAYER_SPEED 5
+# define PLAYER_SIZE 9
 
 # ifdef	__APPLE__
 
@@ -77,6 +77,7 @@ typedef struct s_ray
 {
 	t_vectord	start;
 	t_vectord	end;
+	int			len;
 	double		angle;
 	int			color;
 }	t_ray;
@@ -114,11 +115,13 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*window;
+	bool		render_map;
 	t_image		image;
-	t_image		background;
 	t_map		map;
 	t_player	player;
 }	t_data;
+
+//Main-----------------------------------------------------
 
 //Main
 int		loop(void *param);
@@ -126,7 +129,12 @@ int		loop(void *param);
 //Init
 void	init(t_data *data);
 
-//Drawing
+//Player
+void	move_handler(t_player *player);
+void    look_handler(t_player *player);
+
+
+//Rendering
 void	draw_player(t_image *image, t_player *player);
 void	draw_background(t_image *image);
 void	draw_map(t_image *image, t_map map);
@@ -136,10 +144,12 @@ int		on_destroy(void *param);
 int		on_key_down(int key, void *param);
 int		on_key_up(int key, void *param);
 
-//Utils
+//Utils----------------------------------------------------
+
+// Rendering Utils
 int		create_trgb(int t, int r, int g, int b);
-void	draw_rectangle(t_image *img, t_rect rect);
 void	img_pix_put(t_image *img, int x, int y, int color);
+void	draw_rectangle(t_image *img, t_rect rect);
 void	draw_ray(t_image *img, t_ray ray);
 
 #endif
