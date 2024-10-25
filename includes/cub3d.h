@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/23 19:33:15 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:03:46 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define WIN_HEIGHT 1080 
 # define WIN_WIDTH 1920
 # define WALL_SIZE 64
+# define MMAP_SIZE 100
 
 # define PLAYER_LOOK 0.1
 # define PLAYER_SPEED 5
@@ -39,7 +40,7 @@ enum {
 	KEY_D = 2
 };
 # elif __linux__
-# include <X11/keysym.h>
+#  include <X11/keysym.h>
 
 enum {
 	ON_DESTROY = 17,
@@ -91,12 +92,12 @@ typedef struct s_image
 	int			endian;
 }	t_image;
 
-typedef struct s_map
-{
-	char		**map;
-	int			width;
-	int			height;
-}	t_map;
+// typedef struct s_map
+// {
+// 	char		**map;
+// 	int			width;
+// 	int			height;
+// }	t_map;
 
 typedef struct s_player
 {
@@ -117,7 +118,7 @@ typedef struct s_data
 	void		*window;
 	bool		render_map;
 	t_image		image;
-	t_map		map;
+	char		**map;
 	t_player	player;
 }	t_data;
 
@@ -130,14 +131,15 @@ int		loop(void *param);
 void	init(t_data *data);
 
 //Player
-void	move_handler(t_player *player);
+void	move_handler(t_player *player, char **map);
 void    look_handler(t_player *player);
+int		check_move(t_player *player, char **map);
 
 
 //Rendering
 void	draw_player(t_image *image, t_player *player);
 void	draw_background(t_image *image);
-void	draw_map(t_image *image, t_map map);
+void	draw_map(t_image *image, char **map);
 
 //Events
 int		on_destroy(void *param);

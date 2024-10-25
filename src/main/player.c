@@ -6,13 +6,18 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/23 19:31:20 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:05:24 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
 
-void	move_handler(t_player *player)
+// int	check_move(t_player *player, char **map)
+// {
+	
+// }
+
+void	move_handler(t_player *player, char **map)
 {
 	int	sign;
 
@@ -21,16 +26,22 @@ void	move_handler(t_player *player)
 		sign = 1;
 		if (player->m_down)
 			sign = -1;
-		player->pos.y += round(player->delta.y) * sign;
-		player->pos.x += round(player->delta.x) * sign;
+		// if (check_move(player, map))
+		// {
+			player->pos.y += round(player->delta.y) * sign;
+			player->pos.x += round(player->delta.x) * sign;
+		// }
 	}
 	if (player->m_left || player->m_right)
 	{
 		sign = 1;
 		if (player->m_left)
 			sign = -1;
-		player->pos.y += round(player->delta.x) * sign;
-		player->pos.x += round(player->delta.y) * -sign;
+		// if (!check_move(player, map))
+		// {
+			player->pos.y += round(player->delta.x) * sign;
+			player->pos.x += round(player->delta.y) * -sign;
+		// }
 	}
 	// printf("Player angle: %lf\n", player->angle);
 	// printf("Player pos: (%i, %i)\n", player->pos.x, player->pos.y);

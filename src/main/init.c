@@ -6,17 +6,27 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/21 21:01:34 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:07:14 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, char **map)
 {
-	player->pos = (t_vectori){100, 100};
+	player->pos.x = 0;
+	player->pos.y = 0;
+	while (map[player->pos.y])
+	{
+		player->pos.x = 0;
+		while (map[player->pos.y][player->pos.x] && map[player->pos.y][player->pos.x] != 'P')
+			player->pos.x++;
+		if (map[player->pos.y][player->pos.x] == 'P')
+			break ;
+		player->pos.y++;
+	}
 	player->angle = M_PI / 2;
-	player->delta = (t_vectord){round(cos(player->angle) * PLAYER_SPEED),
+	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,
 		sin(player->angle) * PLAYER_SPEED};
 	player->m_down = false;
 	player->m_left = false;
@@ -44,8 +54,6 @@ void	init(t_data *data)
 			&data->image.line_len, &data->image.endian);
 	// data->background.addr = mlx_get_data_addr(data->background.image, &data->background.bpp,
 	// &data->background.line_len, &data->background.endian);
-	data->map.width = 7;
-	data->map.height = 6;
-	init_player(&data->player);
+	init_player(&data->player, data->map);
 	init_hooks(data);
 }
