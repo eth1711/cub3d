@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 19:21:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:16:51 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 // 4096 x 2304
 // 1920 x 1080
-# define WIN_HEIGHT 2304  
-# define WIN_WIDTH 4096
+# define WIN_HEIGHT 1080  
+# define WIN_WIDTH 1920
 # define WALL_SIZE 64
 # define MMAP_RATIO 25
 # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_HEIGHT
@@ -137,8 +137,8 @@ int		loop(void *param);
 void	init(t_data *data);
 
 //Player
-int		move_handler(t_player *player, t_map map);
-int    look_handler(t_player *player);
+void	move_handler(t_player *player, t_map map);
+void    look_handler(t_player *player);
 int		check_move(t_player *player, t_map map);
 
 
