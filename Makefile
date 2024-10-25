@@ -22,7 +22,7 @@ NAME = cub3d
 
 %.o : %.c
 	@echo Compiling $<
-	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $< 
+	$(CC) $(FLAGS) $(INCLUDES) -O3 -c -o $@ $< 
 
 $(NAME) : $(OBJ)
 	@make -C $(MLX)

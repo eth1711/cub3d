@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 17:47:14 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:08:32 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ void	draw_background(t_image *image)
 	draw_rectangle(image, background);
 }
 
-void	draw_player(t_image *image, t_player *player)
+void	draw_player(t_image *image, t_player player, int wall_size)
 {
 	// printf("draw player: player->angle: %lf\n", player->angle);
+	player.pos.x *= wall_size;
+	player.pos.y *= wall_size;
 	draw_ray(image, (t_ray){
-		(t_vectord){player->pos.x, player->pos.y},
+		(t_vectord){player.pos.x, player.pos.y},
 		(t_vectord){0, 0},
 		15,
-		player->angle,
+		player.angle,
 		create_trgb(0, 224, 16, 30)
 	});
 	draw_rectangle(image, (t_rect){
-		(t_vectori){player->size, player->size},
-		(t_vectori){(int)(player->pos.x - player->size / 2),(int)(player->pos.y - player->size / 2)},
+		(t_vectori){player.size, player.size},
+		(t_vectori){player.pos.x - player.size / 2 ,player.pos.y - player.size / 2},
 		create_trgb(0, 255, 223, 18)
 	});
 }

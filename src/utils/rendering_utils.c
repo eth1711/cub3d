@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:09 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 14:47:52 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:45:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	draw_ray(t_image *img, t_ray ray)
 	len = 0;
 	if (ray.len < 0)
 		ray.len = sqrt((pow(ray.start.x - ray.end.x, 2)) + (pow(ray.start.y - ray.end.y, 2)));
-	printf("ray.start.x: %lf\n", ray.start.x);
-	printf("ray.start.y: %lf\n", ray.start.y);
-	printf("ray.end.x: %lf\n", ray.end.x);
-	printf("ray.end.y: %lf\n", ray.end.y);
+	// printf("ray.start.x: %lf\n", ray.start.x);
+	// printf("ray.start.y: %lf\n", ray.start.y);
+	// printf("ray.end.x: %lf\n", ray.end.x);
+	// printf("ray.end.y: %lf\n", ray.end.y);
 	while (len < ray.len)
 	{
 		len++;

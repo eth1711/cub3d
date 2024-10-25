@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 18:31:12 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:21:35 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@
 # include <stdio.h>
 # include <time.h>
 
-# define WIN_HEIGHT 1080 
-# define WIN_WIDTH 1920
+// 4096 x 2304
+// 1920 x 1080
+# define WIN_HEIGHT 2304  
+# define WIN_WIDTH 4096
 # define WALL_SIZE 64
-# define MMAP_RATIO 20
+# define MMAP_RATIO 25
+# define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_HEIGHT
 
 # define PLAYER_LOOK 0.1
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
-
 # ifdef	__APPLE__
 enum {
 	ON_DESTROY = 17,
@@ -104,9 +106,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_vectori	pos;
+	t_vectord	pos;
 	t_vectord	delta;
-	float		size;
+	int			size;
 	double		angle;
 	bool		m_up;
 	bool		m_down;
@@ -135,13 +137,13 @@ int		loop(void *param);
 void	init(t_data *data);
 
 //Player
-void	move_handler(t_player *player, t_map map);
-void    look_handler(t_player *player);
+int		move_handler(t_player *player, t_map map);
+int    look_handler(t_player *player);
 int		check_move(t_player *player, t_map map);
 
 
 //Rendering
-void	draw_player(t_image *image, t_player *player);
+void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
 void	draw_map(t_image *image, t_map map);
 

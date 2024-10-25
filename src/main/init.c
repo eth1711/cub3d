@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 17:38:12 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:16:00 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	init_player(t_player *player, t_map *map)
 {
-	player->pos.x = 0;
-	player->pos.y = 0;
-	while (map->map[player->pos.y])
+	while (map->map[(int)(player->pos.y)])
 	{
 		player->pos.x = 0;
-		while (map->map[player->pos.y][player->pos.x]
-			&& map->map[player->pos.y][player->pos.x] != 'P')
+		while (map->map[(int)(player->pos.y)][(int)(player->pos.x)]
+			&& map->map[(int)(player->pos.y)][(int)(player->pos.x)] != 'P')
 			player->pos.x++;
-		if (map->map[player->pos.y][player->pos.x] == 'P')
+		if (map->map[(int)(player->pos.y)][(int)(player->pos.x)] == 'P')
 			break ;
 		player->pos.y++;
 	}
+	player->size = map->wall_size / 2;
 	player->angle = M_PI / 2;
 	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,
 		sin(player->angle) * PLAYER_SPEED};
@@ -47,12 +46,13 @@ void	init_hooks(t_data *data)
 
 void	init_map(t_map *map)
 {
-	int		m_size;
+	// int		m_size;
 	int		y;
 	int		x;
 
 	y = 0;
 	x = 0;
+	map->longest_wall = 0;
 	while (map->map[y])
 	{
 		x = 0;
@@ -62,8 +62,8 @@ void	init_map(t_map *map)
 			map->longest_wall = x;
 		y++;
 	}
-	m_size = (MMAP_RATIO * 0.01) * WIN_HEIGHT;
-	map->wall_size = m_size / map->longest_wall;
+	// m_size = (MMAP_RATIO * 0.01) * WIN_HEIGHT;
+	map->wall_size = MMAP_SIZE / map->longest_wall;
 }
 
 void	init(t_data *data)
@@ -76,7 +76,7 @@ void	init(t_data *data)
 			&data->image.line_len, &data->image.endian);
 	// data->background.addr = mlx_get_data_addr(data->background.image, &data->background.bpp,
 	// &data->background.line_len, &data->background.endian);
-	init_player(&data->player, &data->map);
 	init_map(&data->map);
+	init_player(&data->player, &data->map);
 	init_hooks(data);
 }

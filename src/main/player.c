@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 18:26:59 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:22:05 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 	
 // }
 
-void	move_handler(t_player *player, t_map map)
+int	move_handler(t_player *player, t_map map)
 {
 	int	sign;
+	sign = 0;
 	(void)map;
 	if (player->m_up || player->m_down)
 	{
@@ -28,8 +29,8 @@ void	move_handler(t_player *player, t_map map)
 			sign = -1;
 		// if (check_move(player, map))
 		// {
-			player->pos.y += round(player->delta.y) * sign;
-			player->pos.x += round(player->delta.x) * sign;
+			player->pos.y += player->delta.y * sign;
+			player->pos.x += player->delta.x * sign;
 		// }
 	}
 	if (player->m_left || player->m_right)
@@ -43,6 +44,7 @@ void	move_handler(t_player *player, t_map map)
 			player->pos.x += round(player->delta.y) * -sign;
 		// }
 	}
+	return (player->m_left || player->m_down || player->m_up || player->m_right);
 	// printf("Player angle: %lf\n", player->angle);
 	// printf("Player pos: (%i, %i)\n", player->pos.x, player->pos.y);
 	// printf("player->delta.x:%lf\n", player->delta.x);
@@ -51,7 +53,7 @@ void	move_handler(t_player *player, t_map map)
 	// printf("player next pos y:%lf\n", player->delta.y + player->pos.y);
 }
 
-void    look_handler(t_player *player)
+int    look_handler(t_player *player)
 {
     if (player->l_right || player->l_left)
 	{
@@ -66,4 +68,5 @@ void    look_handler(t_player *player)
 		player->delta.x = cos(player->angle) * PLAYER_SPEED;
 		player->delta.y = sin(player->angle) * PLAYER_SPEED;
 	}
+	return (player->l_right || player->l_right);
 }
