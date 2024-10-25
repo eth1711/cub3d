@@ -6,22 +6,23 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 16:07:14 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:38:12 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_player(t_player *player, char **map)
+void	init_player(t_player *player, t_map *map)
 {
 	player->pos.x = 0;
 	player->pos.y = 0;
-	while (map[player->pos.y])
+	while (map->map[player->pos.y])
 	{
 		player->pos.x = 0;
-		while (map[player->pos.y][player->pos.x] && map[player->pos.y][player->pos.x] != 'P')
+		while (map->map[player->pos.y][player->pos.x]
+			&& map->map[player->pos.y][player->pos.x] != 'P')
 			player->pos.x++;
-		if (map[player->pos.y][player->pos.x] == 'P')
+		if (map->map[player->pos.y][player->pos.x] == 'P')
 			break ;
 		player->pos.y++;
 	}
@@ -44,6 +45,27 @@ void	init_hooks(t_data *data)
 	mlx_loop_hook(data->mlx, loop, (void *)data);
 }
 
+void	init_map(t_map *map)
+{
+	int		m_size;
+	int		y;
+	int		x;
+
+	y = 0;
+	x = 0;
+	while (map->map[y])
+	{
+		x = 0;
+		while (map->map[y][x])
+			x++;
+		if (x > map->longest_wall)
+			map->longest_wall = x;
+		y++;
+	}
+	m_size = (MMAP_RATIO * 0.01) * WIN_HEIGHT;
+	map->wall_size = m_size / map->longest_wall;
+}
+
 void	init(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -54,6 +76,7 @@ void	init(t_data *data)
 			&data->image.line_len, &data->image.endian);
 	// data->background.addr = mlx_get_data_addr(data->background.image, &data->background.bpp,
 	// &data->background.line_len, &data->background.endian);
-	init_player(&data->player, data->map);
+	init_player(&data->player, &data->map);
+	init_map(&data->map);
 	init_hooks(data);
 }

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 15:08:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:47:14 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,31 @@ void	draw_player(t_image *image, t_player *player)
 		create_trgb(0, 224, 16, 30)
 	});
 	draw_rectangle(image, (t_rect){
-		(t_vectori){PLAYER_SIZE, PLAYER_SIZE},
-		(t_vectori){(int)(player->pos.x - PLAYER_SIZE / 2),(int)(player->pos.y - PLAYER_SIZE / 2)},
+		(t_vectori){player->size, player->size},
+		(t_vectori){(int)(player->pos.x - player->size / 2),(int)(player->pos.y - player->size / 2)},
 		create_trgb(0, 255, 223, 18)
 	});
 }
 
-void	draw_map(t_image *image, char **map)
+void	draw_map(t_image *image, t_map	map)
 {
 	int		x;
 	int		y;
 	t_rect	wall;
 
 	y = 0;
-	wall.size = (t_vectori){WALL_SIZE - 1, WALL_SIZE - 1};
-	while (map[y])
+	wall.size = (t_vectori){map.wall_size - 1, map.wall_size - 1};
+	while (map.map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (map.map[y][x])
 		{
-			if (map[y][x] == '1')
+			if (map.map[y][x] == '1')
 				wall.color = create_trgb(0, 0, 0, 0);
-			else if (map[y][x] == '0')
+			else if (map.map[y][x] == '0')
 				wall.color = create_trgb(0, 255, 255, 255);
-			wall.pos.x = x * WALL_SIZE;
-			wall.pos.y = y * WALL_SIZE;
+			wall.pos.x = x * map.wall_size;
+			wall.pos.y = y * map.wall_size;
 			draw_rectangle(image, wall);
 			x++;
 		}

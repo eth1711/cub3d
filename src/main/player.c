@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 16:05:24 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:26:59 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 	
 // }
 
-void	move_handler(t_player *player, char **map)
+void	move_handler(t_player *player, t_map map)
 {
 	int	sign;
-
+	(void)map;
 	if (player->m_up || player->m_down)
 	{
 		sign = 1;

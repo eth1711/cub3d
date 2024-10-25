@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 15:51:58 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:29:22 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	loop(void *param)
 
 	data = (t_data *)param;
 	frames++;
-	move_handler(&data->player);
+	move_handler(&data->player, data->map);
 	look_handler(&data->player);
 	if (frames == 60)
 	{
@@ -39,8 +39,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	init(&data);
-	data.map = (char *[]){
+	data.map.map = (char *[]){
 		"1111111\n",
 		"1000001\n",
 		"100P00111\n",
@@ -49,5 +48,6 @@ int	main(int argc, char **argv)
 		"1111111\n",
 		NULL
 	};
+	init(&data);
 	mlx_loop(data.mlx);
 }
