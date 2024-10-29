@@ -6,11 +6,24 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 19:08:32 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:19:36 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_rays(t_player *player, char **map)
+{
+	t_ray		ray;
+	t_vectord	offset;
+	double		arctan;
+
+	ray.angle = player->angle;
+	arctan = -1 / tan(ray.angle);
+	if (ray.angle > M_PI)
+		ray.start.y = (int)player.pos.x;
+	ray.start.x = (player->pos.x - ray.start.y) * arctan + player->pos.x;
+}
 
 void	draw_background(t_image *image)
 {
@@ -26,19 +39,19 @@ void	draw_background(t_image *image)
 
 void	draw_player(t_image *image, t_player player, int wall_size)
 {
-	// printf("draw player: player->angle: %lf\n", player->angle);
 	player.pos.x *= wall_size;
 	player.pos.y *= wall_size;
 	draw_ray(image, (t_ray){
 		(t_vectord){player.pos.x, player.pos.y},
 		(t_vectord){0, 0},
-		15,
+		player.size * 1.5,
 		player.angle,
 		create_trgb(0, 224, 16, 30)
 	});
 	draw_rectangle(image, (t_rect){
 		(t_vectori){player.size, player.size},
-		(t_vectori){player.pos.x - player.size / 2 ,player.pos.y - player.size / 2},
+		(t_vectori){player.pos.x - player.size / 2,
+		player.pos.y - player.size / 2},
 		create_trgb(0, 255, 223, 18)
 	});
 }

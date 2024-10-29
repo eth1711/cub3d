@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/26 19:56:57 by pringles         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:19:32 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# ifdef __linux__
+#  include <X11/keysym.h>
+# endif
 
 # include "libft.h"
 # include "mlx.h"
@@ -25,13 +29,18 @@
 # define WIN_WIDTH 1920
 # define WALL_SIZE 64
 # define MMAP_RATIO 25
-# define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_HEIGHT
+// # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_WIDTH
 
 # define PLAYER_HITBOX 0.6
 # define PLAYER_LOOK 0.1
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
+
+# define DOF 8
+# define FOV 60
+
 # ifdef	__APPLE__
+
 enum {
 	ON_DESTROY = 17,
 	ON_KEY_DOWN = 2,
@@ -45,7 +54,6 @@ enum {
 	KEY_RIGHT = 124
 };
 # elif __linux__
-#  include <X11/keysym.h>
 
 enum {
 	ON_DESTROY = 17,
@@ -60,6 +68,15 @@ enum {
 	KEY_RIGHT = XK_Right
 };
 # endif
+
+// enum parsing{
+// 	NO,
+// 	SO,
+// 	EA,
+// 	WE,
+// 	F,
+// 	C
+// };
 
 typedef struct s_vectori
 {
@@ -111,13 +128,33 @@ typedef struct s_player
 	t_vectord	delta;
 	int			size;
 	double		angle;
-	bool		m_up;
-	bool		m_down;
 	bool		m_left;
 	bool		m_right;
+	bool		m_up;
+	bool		m_down;
 	bool		l_left;
 	bool		l_right;
 }	t_player;
+
+// typedef struct s_textures
+// {
+// 	void	*north;
+// 	void	*south;
+// 	void	*east;
+// 	void	*west;
+// 	int		*floor;
+// 	int		*ceiling;
+// }	t_textures;
+
+typedef struct s_parsing
+{
+	bool	no;
+	bool	so;	
+	bool	we;	
+	bool	ea;	
+	bool	f;
+	bool	c;
+}	t_parsing;
 
 typedef struct s_data
 {
@@ -138,10 +175,9 @@ int		loop(void *param);
 void	init(t_data *data);
 
 //Player
-void	move_handler(t_player *player, t_map map);
-void    look_handler(t_player *player);
+void	move_handler(t_player *player, char **map);
+void	look_handler(t_player *player);
 int		check_move(t_player *player, t_map map);
-
 
 //Rendering
 void	draw_player(t_image *image, t_player player, int wall_size);

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/25 19:16:00 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 15:48:50 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_hooks(t_data *data)
 
 void	init_map(t_map *map)
 {
-	// int		m_size;
+	int		m_size;
 	int		y;
 	int		x;
 
@@ -62,8 +62,8 @@ void	init_map(t_map *map)
 			map->longest_wall = x;
 		y++;
 	}
-	// m_size = (MMAP_RATIO * 0.01) * WIN_HEIGHT;
-	map->wall_size = MMAP_SIZE / map->longest_wall;
+	m_size = (MMAP_RATIO * 0.01) * WIN_WIDTH;
+	map->wall_size = m_size / map->longest_wall;
 }
 
 void	init(t_data *data)
