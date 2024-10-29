@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 22:20:07 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:29:58 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,26 @@ void	draw_rays(t_image *image, t_player *player, char **map)
 	dof = 0;
 	ray.angle = player->angle;
 	arctan = -1 / tan(ray.angle);
+	offset.y = 0;
 	if (ray.angle > M_PI)
 	{
 		ray.len = -1;
 		ray.start.y = (int)player->pos.x;
 		ray.start.x = (player->pos.x - ray.end.y) * arctan + player->pos.x;
-		ray.end = ray.start;
 		offset.y = -1;
-		offset.x = offset.y * arctan;
 	}
-	if (ray.angle < M_PI)
+	else if (ray.angle < M_PI)
 	{
-		ray.end.y = (int)player->pos.x + 1;
-		ray.end.x = (player->pos.x - ray.end.y) * arctan + player->pos.x;
+		ray.start.y = (int)player->pos.x + 1;
+		ray.start.x = (player->pos.x - ray.end.y) * arctan + player->pos.x;
 		offset.y = 1;
-		offset.x = offset.y * arctan;
 	}
+	ray.end = ray.start;
+	offset.x = offset.y * arctan;
 	while (dof < DOF)
 	{
+		printf("tay.end.y %lf\n", ray.end.y);
+		printf("tay.end.x %lf\n", ray.end.x);
 		if (map[(int)ray.end.y][(int)ray.end.x] == '1')
 			break ;
 		else

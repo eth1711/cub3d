@@ -27,6 +27,7 @@ NAME = cub3d
 $(NAME) : $(OBJ)
 	@make -C $(MLX)
 	@make -C lib/Libft
+	@make -C lib/gnl
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
 
 all : $(NAME)
@@ -35,10 +36,12 @@ all : $(NAME)
 clean :
 	@rm -rf $(OBJ)
 	@make clean -C ./lib/Libft
+	@make clean -C ./lib/gnl
 
 fclean : clean
 	@rm -rf $(NAME)
-	@make fclean -C ./lib/Libft
+	@make fclean -C ./lib/gnl
+	@make clean -C ./lib/Libft
 
 re : fclean all
 

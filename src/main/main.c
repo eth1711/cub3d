@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 22:30:00 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:27:17 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	loop(void *param)
 	draw_background(&data->image);
 	if (data->player.map)
 	{
+		draw_rays(&data->image, &data->player, data->map.map);
 		draw_map(&data->image, data->map);
 		draw_player(&data->image, data->player, data->map.wall_size);
 	}
