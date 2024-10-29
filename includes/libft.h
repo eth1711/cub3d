@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:48:03 by amaligno          #+#    #+#             */
-/*   Updated: 2024/09/25 18:11:51 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:38:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+//Get Next Line
+char				*get_next_line(int fd);
+char				*to_send(char *str);
+
+size_t				length(char *str);
+int					strcheck(char *s);
+
+//Libft
 void				*ft_bzero(void *s, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
@@ -31,7 +39,7 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
 void				*ft_memset(void *b, int c, size_t len);
-void				*ft_memcpy(void *dst, const void *src, size_t n);
+void				*ft_memcpy(void *dst, void *src, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_calloc(size_t count, size_t size);
@@ -59,7 +67,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 char				*ft_strdup(const char *s1);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

@@ -16,7 +16,7 @@ endif
 
 INCLUDES = -I includes -I $(MLX) 
 
-LINKER = -L./lib/Libft -L $(MLX) -L./lib/get_next_line -lgnl -lft -lm -lmlx $(LINKER_FLAGS)
+LINKER = -L./lib/Libft -L $(MLX) -lft -lm -lmlx $(LINKER_FLAGS)
 
 NAME = cub3d
 
@@ -27,7 +27,6 @@ NAME = cub3d
 $(NAME) : $(OBJ)
 	@make -C $(MLX)
 	@make -C lib/Libft
-	@make -C lib/get_next_line
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
 
 all : $(NAME)
