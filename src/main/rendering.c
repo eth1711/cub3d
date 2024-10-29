@@ -6,23 +6,50 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 21:19:36 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:53:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_rays(t_player *player, char **map)
+void	draw_rays(t_image *image, t_player *player, char **map)
 {
 	t_ray		ray;
 	t_vectord	offset;
 	double		arctan;
+	int			dof;
 
+	dof = 0;
 	ray.angle = player->angle;
 	arctan = -1 / tan(ray.angle);
 	if (ray.angle > M_PI)
-		ray.start.y = (int)player.pos.x;
-	ray.start.x = (player->pos.x - ray.start.y) * arctan + player->pos.x;
+	{
+		ray.len = -1;
+		ray.start.y = (int)player->pos.x;
+		ray.start.x = (player->pos.x - ray.end.y) * arctan + player->pos.x;
+		ray.end = ray.start;
+		offset.y = -1;
+		offset.x = offset.y * arctan;
+	}
+	if (ray.angle < M_PI)
+	{
+		ray.end.y = (int)player->pos.x + 1;
+		ray.end.x = (player->pos.x - ray.end.y) * arctan + player->pos.x;
+		offset.y = 1;
+		offset.x = offset.y * arctan;
+	}
+	while (dof < DOF)
+	{
+		if (map[(int)ray.end.y][(int)ray.end.x] == '1')
+			break ;
+		else
+		{
+			ray.start.x += offset.x;
+			ray.start.y += offset.y;
+			dof++;
+		}
+	}
+	draw_ray(image, ray);
 }
 
 void	draw_background(t_image *image)
