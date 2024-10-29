@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 19:07:02 by etlim            ###   ########.fr       */
+/*   Updated: 2024/10/30 19:08:02 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <time.h>
+# include <fcntl.h>
 
 // 4096 x 2304
 // 1920 x 1080
@@ -153,7 +154,7 @@ typedef struct s_parsing
 {
 	bool	no;
 	bool	so;	
-	bool	we;	
+	bool	we;
 	bool	ea;	
 	bool	f;
 	bool	c;
@@ -164,7 +165,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*window;
 	bool		render_map;
-	t_textures	textures;
+	// t_textures	textures;
 	t_image		image;
 	t_map		map;
 	t_player	player;
