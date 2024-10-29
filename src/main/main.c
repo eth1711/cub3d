@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 21:04:50 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:30:00 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int	loop(void *param)
 	move_handler(&data->player, data->map.map);
 	look_handler(&data->player);
 	draw_background(&data->image);
-	draw_map(&data->image, data->map);
-	draw_player(&data->image, data->player, data->map.wall_size);
+	if (data->player.map)
+	{
+		draw_map(&data->image, data->map);
+		draw_player(&data->image, data->player, data->map.wall_size);
+	}
 	mlx_put_image_to_window(data->mlx, data->window, data->image.image, 0, 0);
 	return (0);
 }

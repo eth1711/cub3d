@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:21 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/21 19:55:13 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:28:48 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	on_key_down(int key, void *param)
 		data->player.l_left = true;
 	else if (key == KEY_RIGHT)
 		data->player.l_right = true;
+	else if (key == KEY_E)
+		data->player.use = !data->player.use;
+	else if (key == KEY_M)
+		data->player.map = !data->player.map;
 	else if (key == KEY_ESC)
 		exit(0);
 	return (0);

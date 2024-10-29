@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 22:12:43 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:26:52 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ enum {
 	KEY_S = XK_s,
 	KEY_D = XK_d,
 	KEY_E = XK_e,
+	KEY_M = XK_m,
 	KEY_LEFT = XK_Left,
-	KEY_RIGHT = XK_Right
+	KEY_RIGHT = XK_Right,
 };
 # endif
 
@@ -134,6 +135,8 @@ typedef struct s_player
 	bool		m_down;
 	bool		l_left;
 	bool		l_right;
+	bool		map;
+	bool		use;
 }	t_player;
 
 // typedef struct s_textures
