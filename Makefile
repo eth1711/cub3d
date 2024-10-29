@@ -14,9 +14,9 @@ else
 	LINKER_FLAGS = -framework OpenGL -framework AppKit
 endif
 
-INCLUDES = -I includes -I $(MLX) 
+INCLUDES = -I includes -I $(MLX) -I ./lib/Libft
 
-LINKER = -L./lib/Libft -L $(MLX) -lft -lm -lmlx $(LINKER_FLAGS)
+LINKER = -L./lib/Libft -L $(MLX) -L./lib/gnl -lgnl -lft -lm -lmlx $(LINKER_FLAGS)
 
 NAME = cub3d
 

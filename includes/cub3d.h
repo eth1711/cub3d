@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 21:38:51 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/29 22:12:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,9 @@ int		on_key_down(int key, void *param);
 int		on_key_up(int key, void *param);
 
 //Utils----------------------------------------------------
+
+//gnl
+char	*get_next_line(int fd);
 
 // Rendering Utils
 int		create_trgb(int t, int r, int g, int b);
