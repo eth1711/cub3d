@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/26 01:16:51 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:56:57 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define MMAP_RATIO 25
 # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_HEIGHT
 
+# define PLAYER_HITBOX 0.6
 # define PLAYER_LOOK 0.1
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/26 00:06:05 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:54:12 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 int	loop(void *param)
 {
 	t_data		*data;
+	// static int	frame;
 
+	// frame++;
 	data = (t_data *)param;
+	// printf("frame: %i\n", frame);
 	move_handler(&data->player, data->map);
 	look_handler(&data->player);
 	draw_background(&data->image);
@@ -38,7 +41,7 @@ int	main(int argc, char **argv)
 		"100P00111",
 		"100000101",
 		"100000111",
-		"1111111111111111111",
+		"111111111",
 		"1111111",
 		NULL
 	};
