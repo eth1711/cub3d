@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 00:26:20 by pringles         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:52:23 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int		check_move(t_player *player, t_map map);
 //Rendering
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
-void	draw_rays(t_image *image, t_player *player, char **map);
+void	draw_rays(t_image *image, t_player *player, t_map map);
 void	draw_map(t_image *image, t_map map);
 
 //Events
