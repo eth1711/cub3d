@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 19:08:02 by etlim            ###   ########.fr       */
+/*   Updated: 2024/10/30 19:08:33 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ enum {
 };
 # endif
 
-// enum parsing{
-// 	NO,
-// 	SO,
-// 	EA,
-// 	WE,
-// 	F,
-// 	C
-// };
+enum parsing{
+	NO,
+	SO,
+	EA,
+	WE,
+	F,
+	C
+};
 
 typedef struct s_vectori
 {
