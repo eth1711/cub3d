@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 17:52:23 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:28:29 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
 
-# define DOF 8
+# define DOF 6
 # define FOV 60
 
 # ifdef	__APPLE__
@@ -120,7 +120,8 @@ typedef struct s_map
 {
 	char		**map;
 	int			wall_size;
-	int			longest_wall;
+	int			length;
+	int			width;
 }	t_map;
 
 typedef struct s_player
@@ -176,6 +177,7 @@ int		loop(void *param);
 
 //Init
 void	init(t_data *data);
+void	init_player(t_player *player, t_map *map);
 
 //Player
 void	move_handler(t_player *player, char **map);
@@ -185,7 +187,7 @@ int		check_move(t_player *player, t_map map);
 //Rendering
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
-void	draw_rays(t_image *image, t_player *player, t_map map);
+void	cast_rays(t_image *image, t_player *player, t_map map);
 void	draw_map(t_image *image, t_map map);
 
 //Events

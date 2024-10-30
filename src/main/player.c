@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 15:44:19 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:57:10 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@
 // y: sin(angle) +/- pos.y
 // Move left/right perpendicular to the angle (everything is opposite)
 // x: sin(angle) +/- pos.x
-
 // y: cos(angle) -/+ pos.y
 void	move_and_check(t_player *player, char **map, t_vectord hitbox)
 {
 	int	sign;
 
 	sign = 1;
-	if (player->m_up || player->m_down)
+	if (player->m_up ^ player->m_down)
 	{
 		if (player->m_down)
 			sign = -1;
@@ -35,7 +34,7 @@ void	move_and_check(t_player *player, char **map, t_vectord hitbox)
 			[(int)(player->pos.x + hitbox.x * sign)] != '1')
 			player->pos.x += player->delta.x * sign;
 	}
-	if (player->m_left || player->m_right)
+	if (player->m_left ^ player->m_right)
 	{
 		if (player->m_left)
 			sign = -1;
@@ -71,8 +70,11 @@ void	look_handler(t_player *player)
 		player->angle -= M_PI * 2;
 	else if ((player->angle < 0))
 		player->angle += M_PI * 2;
-	player->delta.x = cos(player->angle) * PLAYER_SPEED;
-	player->delta.y = sin(player->angle) * PLAYER_SPEED;
+	if (player->l_left ^ player->l_right)
+	{
+		player->delta.x = cos(player->angle) * PLAYER_SPEED;
+		player->delta.y = sin(player->angle) * PLAYER_SPEED;
+	}
 }
 
 // printf("Player pos: (%lf, %lf)\n", player->pos.x, player->pos.y);
