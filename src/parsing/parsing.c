@@ -6,22 +6,40 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/10/30 19:03:34 by etlim            ###   ########.fr       */
+/*   Updated: 2024/10/30 22:35:24 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void check_path()
+{
+
+}
 
 void check_textures(char *map)
 {
-	int cur_check;
-	bool *textures;
-	char **checks;
+	int		fd;
+	int		cur_check;
+	bool	*textures;
+	char	**checks;
+	char	*line;
 
 	cur_check = 0;
 	textures = (bool[6]){0, 0, 0, 0, 0, 0};
 	checks = (char*[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
-	if(strncmp())
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (ft_strncmp(line, checks[cur_check], 3) && !textures[cur_check])
+			check_path();
+			textures[cur_check] = 1;
+		free(line);
+		line = get_next_line(fd);
+		
+	}
 		
 	
 	
