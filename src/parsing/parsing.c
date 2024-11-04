@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/04 17:11:27 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/04 20:41:43 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,63 +39,76 @@ int check_rgb(char *line)
 	return 0;
 }
 
-void set_texture_rgb(char *line, char **checks, int cur_check, bool *textures)
+void set_texture_rgb(char *line, char **checks, bool *textures, int cur_check, int count)
 {
-	line = line + ft_strlen(checks[cur_check]);
-	if (cur_check < 4 && open(line, O_RDONLY) > 0)
-		textures[cur_check] = 1;
-	else if(cur_check >= 4 && !check_rgb(line))
-		textures[cur_check] = 1;
+	while (cur_check++ < 6)
+	{
+		if (ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])) && !textures[cur_check])
+		{
+			line = line + ft_strlen(checks[cur_check]);
+			if (cur_check < 4 && open(line, O_RDONLY) > 0)
+			{
+				textures[cur_check] = 1;
+				count++;
+			}
+			else if(cur_check >= 4 && !check_rgb(line))
+			{
+				textures[cur_check] = 1;
+				count++;
+			}
+		}
+		else if (textures[cur_check])
+			exit_error("Duplicate found!");
+	}		
 }
 
 void check_textures(char *map, int fd)
 {
 	int		cur_check;
+	int 	count;
 	bool	*textures;
 	char	**checks;
 	char	*line;
 
 	textures = (bool[6]){0, 0, 0, 0, 0, 0};
 	checks = (char*[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
+	count = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		cur_check = 0;
-		while (cur_check < 6)
+		set_texture_rgb(line, &checks, &textures, cur_check, &count);
+		if (count == 6)
 		{
-			if (ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])) && !textures[cur_check])
-				set_texture_rgb(line, checks, cur_check, textures);
-			else if (textures[cur_check])
-				exit(-1);//error message;
+			cur_check = 0;
+			while (cur_check++ < 6)
+				if (!textures[cur_check])
+					exit_error("Error: Missing texture or RGB config!");
+			break ;
 		}
 		free(line);
 	}
-	cur_check = 0;
-	while (cur_check++ < 6)
-		if (!textures[cur_check])
-			return false;
 }
-
-//insert exit function with error code
-
-// char **str_alloc(char *map, int *lw)
-// {
-// 	char	**str;
-// 	char	*line;
-// 	int		i;
 	
-// 	line = get_next_line(fd);
-// }
+
+char **str_alloc(char *map, int *lw, int fd)
+{
+	char	**str;
+	char	*line;
+	int		i;
+	
+	line = get_next_line(fd);
+}
 
 int parser(char *map)
 {
 	char	**str;
 	char	*line;
-	int		*lw;
+	int		lw;
 	int		fd;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	check_textures(map, &fd);
-	str = str_alloc(map, &lw);
+	check_textures(map, fd);
+	str = str_alloc(map, &lw, fd);
 }
