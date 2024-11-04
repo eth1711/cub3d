@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/04 21:39:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:51:53 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ void	render_rays(t_image *image, t_ray rays[2], t_player *player, t_map map)
 	rays[0].start = (t_vectord)
 	{player->pos.x * map.wall_size, player->pos.y * map.wall_size};
 	rays[1].start = rays[0].start;
+	rays[0].end.x *= map.wall_size;
+	rays[0].end.y *= map.wall_size;
+	rays[1].end.x *= map.wall_size;
+	rays[1].end.y *= map.wall_size;
 	rays[0].len = calc_hyp(rays[0].start, rays[0].end);
 	rays[1].len = calc_hyp(rays[1].start, rays[1].end);
 	if (rays[0].len < rays[1].len)
