@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/04 18:07:45 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:12:15 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,8 @@ int		create_trgb(int t, int r, int g, int b);
 void	img_pix_put(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_rect rect);
 void	draw_ray(t_image *img, t_ray *ray);
+
+//Ray_utils
+double	calc_hyp(t_vectord side1, t_vectord side2);
 
 #endif

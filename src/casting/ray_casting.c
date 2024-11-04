@@ -6,13 +6,13 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/04 18:09:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:39:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_cast_h(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
+void	init_ray_h(t_player *player, t_ray *ray, t_vectord *offset)
 {
 	double	arctan;
 
@@ -23,9 +23,8 @@ void	init_cast_h(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
 	ray->len = -1;
 	if (!ray->angle || ray->angle == M_PI)
 	{
-		ray->end.y = player->pos.y;
-		ray->end.x = player->pos.x;
-		*dof = DOF;
+		ray->end = player->pos;
+		*offset = (t_vectord){0, 0};
 	}
 	if (ray->angle > M_PI)
 	{
@@ -41,7 +40,7 @@ void	init_cast_h(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
 	offset->x = -offset->y * arctan;
 }
 
-void	init_cast_v(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
+void	init_ray_v(t_player *player, t_ray *ray, t_vectord *offset)
 {
 	double	ntan;
 
@@ -51,9 +50,9 @@ void	init_cast_v(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
 	ray->len = -1;
 	if (ray->angle == M_PI_2 || ray->angle == M_PI_2 * 3)
 	{
-		ray->end.y = player->pos.y;
-		ray->end.x = player->pos.x;
-		*dof = DOF;
+		ray->end = player->pos;
+		*offset = (t_vectord){0, 0};
+		return ;
 	}
 	if (ray->angle > M_PI_2 && ray->angle < M_PI_2 * 3)
 	{
@@ -69,18 +68,12 @@ void	init_cast_v(t_player *player, t_ray *ray, t_vectord *offset, int *dof)
 	offset->y = -offset->x * ntan;
 }
 
-void	render_ray(t_image *image, t_ray ray, t_player *player, t_map map)
+void	cast_ray(t_ray *ray, t_map map, t_vectord offset)
 {
-	ray.start.x = player->pos.x * map.wall_size;
-	ray.start.y = player->pos.y * map.wall_size;
-	ray.end.x *= map.wall_size;
-	ray.end.y *= map.wall_size;
-	draw_ray(image, ray);
-}
+	int	dof;
 
-void	cast_ray(t_ray *ray, t_map map, t_vectord offset, int dof)
-{
-	while (dof < DOF)
+	dof = 0;
+	while (dof < DOF && offset.x)
 	{
 		printf("ray.end.y %lf\n", ray->end.y);
 		printf("ray->end.x %lf\n", ray->end.x);
@@ -98,21 +91,29 @@ void	cast_ray(t_ray *ray, t_map map, t_vectord offset, int dof)
 	}
 }
 
+void	render_rays(t_image *image, t_ray rays[2], t_player *player, t_map map)
+{
+	rays[0].start = (t_vectord)
+	{player->pos.x * map.wall_size, player->pos.y * map.wall_size};
+	rays[1].start = rays[0].start;
+	rays[0].len = calc_hyp(rays[0].start, rays[0].end);
+	rays[1].len = calc_hyp(rays[1].start, rays[1].end);
+	if (rays[0].len < rays[1].len)
+		draw_ray(image, rays);
+	else
+		draw_ray(image, rays + 1);
+}
+
 void	cast_rays(t_image *image, t_player *player, t_map map)
 {
 	t_ray		ray_v;
 	t_ray		ray_h;
 	t_vectord	offset_h;
 	t_vectord	offset_v;
-	int			dof;
 
-	dof = 0;
-	init_cast_h(player, &ray_h, &offset_h, &dof);
-	init_cast_v(player, &ray_v, &offset_v, &dof);
-	cast_ray(&ray_h, map, offset_h, dof);
-	cast_ray(&ray_v, map, offset_v, dof);
-	if (ray_h.len < ray_h.len)
-		render_ray(image, &ray_h, player, map);
-	else
-		render_ray(image, &ray_v, player, map);
+	init_ray_h(player, &ray_h, &offset_h);
+	init_ray_v(player, &ray_v, &offset_v);
+	cast_ray(&ray_v, map, offset_v);
+	cast_ray(&ray_h, map, offset_h);
+	render_rays(image, (t_ray[2]){ray_h, ray_v}, player, map);
 }
