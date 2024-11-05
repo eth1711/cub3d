@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 21:39:29 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:05:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	loop(void *param)
 {
 	t_data		*data;
+	t_ray		rays[FOV];
 	// static int	frame;
 
 	// frame++;
@@ -23,11 +24,13 @@ int	loop(void *param)
 	move_handler(&data->player, data->map.map);
 	look_handler(&data->player);
 	draw_background(&data->image);
+	cast_rays(data->player, data->map, rays);
+	draw_rays_3d(&data->image, rays, data->map, data->player);
 	if (data->player.map)
 	{
 		draw_map(&data->image, data->map);
 		draw_player(&data->image, data->player, data->map.wall_size);
-		cast_rays(&data->image, &data->player, data->map);
+		draw_rays_2d(&data->image, rays);
 	}
 	mlx_put_image_to_window(data->mlx, data->window, data->image.image, 0, 0);
 	return (0);
@@ -43,7 +46,7 @@ int	main(int argc, char **argv)
 		"1111111",
 		"1000001",
 		"100P001",
-		"1000001",
+		"1001111",
 		"1000001",
 		"1111111",
 		NULL

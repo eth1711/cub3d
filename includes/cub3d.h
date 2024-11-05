@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/04 19:12:15 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:21:41 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 # define PLAYER_LOOK 0.1
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
+# define DEGREE_IN_RADIANS 0.0174533
 
 # define DOF 6
-# define FOV 60
+# define FOV 2
 
 # ifdef	__APPLE__
 
@@ -104,6 +105,7 @@ typedef struct s_ray
 	t_vectord	start;
 	t_vectord	end;
 	int			len;
+	bool		vert;
 	double		angle;
 	int			color;
 }	t_ray;
@@ -171,14 +173,17 @@ typedef struct s_data
 	t_player	player;
 }	t_data;
 
-//Main-----------------------------------------------------
-
-//Main
-int		loop(void *param);
+//Casting
+void	cast_rays(t_player player, t_map map, t_ray *rays);
 
 //Init
 void	init(t_data *data);
 void	init_player(t_player *player, t_map *map);
+
+//Main-----------------------------------------------------
+
+//Main
+int		loop(void *param);
 
 //Player
 void	move_handler(t_player *player, char **map);
@@ -188,7 +193,6 @@ int		check_move(t_player *player, t_map map);
 //Rendering
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
-void	cast_rays(t_image *image, t_player *player, t_map map);
 void	draw_map(t_image *image, t_map map);
 
 //Events
@@ -205,7 +209,9 @@ char	*get_next_line(int fd);
 int		create_trgb(int t, int r, int g, int b);
 void	img_pix_put(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_rect rect);
-void	draw_ray(t_image *img, t_ray *ray);
+void	draw_ray(t_image *img, t_ray ray);
+void	draw_rays_2d(t_image *image, t_ray *rays);
+void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player);
 
 //Ray_utils
 double	calc_hyp(t_vectord side1, t_vectord side2);
