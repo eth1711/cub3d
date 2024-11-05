@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 19:20:54 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:31:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player, t_map map)
 	ray1.end.y *= map.wall_size;
 	ray2.end.x *= map.wall_size;
 	ray2.end.y *= map.wall_size;
-	ray1.len = fabs(calc_hyp(ray1.start, ray1.end));
-	ray2.len = fabs(calc_hyp(ray2.start, ray2.end));
+	ray1.len = calc_hyp(ray1.start, ray1.end);
+	ray2.len = calc_hyp(ray2.start, ray2.end);
 	if (ray1.len < ray2.len)
 		return (ray1);
 	return (ray2);

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 19:21:41 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:31:00 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define DEGREE_IN_RADIANS 0.0174533
 
 # define DOF 6
-# define FOV 2
+# define FOV 60
 
 # ifdef	__APPLE__
 
@@ -102,12 +102,12 @@ typedef struct s_rect
 
 typedef struct s_ray
 {
-	t_vectord	start;
-	t_vectord	end;
-	int			len;
-	bool		vert;
-	double		angle;
-	int			color;
+	t_vectord		start;
+	t_vectord		end;
+	unsigned long	len;
+	bool			vert;
+	double			angle;
+	int				color;
 }	t_ray;
 
 typedef struct s_image

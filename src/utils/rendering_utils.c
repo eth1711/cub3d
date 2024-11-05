@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:09 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 16:39:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:31:58 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_rectangle(t_image *img, t_rect rect)
 
 void	draw_ray(t_image *img, t_ray ray)
 {
-	int	len;
+	unsigned long	len;
 
 	len = 0;
 	if (ray.len < 0)
