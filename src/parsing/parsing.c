@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/04 20:41:43 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/05 17:30:21 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int check_rgb(char *line)
 	return 0;
 }
 
-void set_texture_rgb(char *line, char **checks, bool *textures, int cur_check, int count)
+void set_texture_rgb(char *line, char **checks, bool *textures, int count)
 {
+	int cur_check;
+
+	cur_check = 0;
 	while (cur_check++ < 6)
 	{
 		if (ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])) && !textures[cur_check])
@@ -75,14 +78,14 @@ void check_textures(char *map, int fd)
 	count = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		cur_check = 0;
-		set_texture_rgb(line, &checks, &textures, cur_check, &count);
+		set_texture_rgb(line, &checks, &textures, &count);
 		if (count == 6)
 		{
 			cur_check = 0;
 			while (cur_check++ < 6)
 				if (!textures[cur_check])
 					exit_error("Error: Missing texture or RGB config!");
+			free(line);
 			break ;
 		}
 		free(line);
@@ -94,9 +97,20 @@ char **str_alloc(char *map, int *lw, int fd)
 {
 	char	**str;
 	char	*line;
-	int		i;
 	
 	line = get_next_line(fd);
+	while (line)
+	{
+		str = ft_calloc(sizeof(char *), (*lw + 1));
+		str[*lw] = line;
+		free(line);
+		line = get_next_line(fd);
+		*lw += 1;
+	}
+	str = ft_calloc(sizeof(char *), (*lw + 1));
+	str[*lw] = NULL;
+	
+	
 }
 
 int parser(char *map)
