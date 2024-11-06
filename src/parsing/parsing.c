@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/05 17:30:21 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/06 17:22:58 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int check_rgb(char *line)
 {
-	int *values;
-	int cur;
 	int r;
 	int g;
 	int b;
+	int cur;
+	int *values;
 	
 	values = (int){-1, -1, -1};
 	cur = 0;
@@ -67,11 +67,11 @@ void set_texture_rgb(char *line, char **checks, bool *textures, int count)
 
 void check_textures(char *map, int fd)
 {
-	int		cur_check;
 	int 	count;
+	int		cur_check;
 	bool	*textures;
-	char	**checks;
 	char	*line;
+	char	**checks;
 
 	textures = (bool[6]){0, 0, 0, 0, 0, 0};
 	checks = (char*[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
@@ -98,19 +98,17 @@ char **str_alloc(char *map, int *lw, int fd)
 	char	**str;
 	char	*line;
 	
+	str = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
-		str = ft_calloc(sizeof(char *), (*lw + 1));
+		str = ft_realloc(str, lw, lw + 2);
 		str[*lw] = line;
 		free(line);
 		line = get_next_line(fd);
 		*lw += 1;
+		
 	}
-	str = ft_calloc(sizeof(char *), (*lw + 1));
-	str[*lw] = NULL;
-	
-	
 }
 
 int parser(char *map)
