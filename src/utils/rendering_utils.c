@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:09 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 19:31:58 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:03:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ void	draw_rectangle(t_image *img, t_rect rect)
 	int	x;
 
 	y = 0;
-	while (y < rect.size.y)
+	x = 0;
+	while (y < rect.size.y && y + rect.pos.y <= WIN_HEIGHT && x + rect.pos.x <= WIN_WIDTH)
 	{
 		x = 0;
-		while (x < rect.size.x)
+		while(x < rect.size.x && y + rect.pos.y >= 0)
 		{
-			img_pix_put(img, x + rect.pos.x, y + rect.pos.y,
-				rect.color);
+			if (x + rect.pos.x >= 0)
+				img_pix_put(img, x + rect.pos.x, y + rect.pos.y,
+					rect.color);
 			x++;
 		}
 		y++;
