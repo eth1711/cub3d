@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 18:39:02 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:20:23 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void	draw_background(t_image *image)
 
 	background.pos.x = 0;
 	background.pos.y = 0;
-	background.size.y = WIN_HEIGHT;
+	background.size.y = WIN_HEIGHT / 2;
 	background.size.x = WIN_WIDTH;
-	background.color = create_trgb(0, 136, 186, 71);
+	background.color = create_trgb(0, 104, 116, 212);
+	draw_rectangle(image, background);
+	background.pos = (t_vectori){0, WIN_HEIGHT / 2};
+	background.color = FLOOR;
 	draw_rectangle(image, background);
 }
 
@@ -80,25 +83,28 @@ void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
 	double	angle;
 	double	len;
 	int		i;
-	(void)map;
 
+	(void)map;
 	i = 0;
-	line.size.x = 8;
-	line.pos.x = 500;
-	line.color = create_trgb(0, 130, 72, 207);
+	line.size.x = WIN_WIDTH / (FOV - 5);
+	line.pos.x = -line.size.x;
 	while (i < FOV)
 	{
 		angle = player.angle - rays[i].angle;
 		if (angle < 0)
 			angle += M_PI * 2;
-		if (angle > M_PI)
+		if (angle > M_PI * 2)
 			angle -= M_PI * 2;
 		len = rays[i].len * cos(angle);
-		line.size.y = (64 * 600) / len;
-		line.pos.y = 600 + (160 - line.size.y / 2);
-		if (line.size.y > 600)
-			line.size.y = 600;
-		line.pos.x += 8;
+		line.size.y = (WALL_SIZE * WIN_WIDTH) / len;
+		if (line.size.y > WIN_WIDTH)
+			line.size.y = WIN_WIDTH;
+		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;
+		line.pos.x += line.size.x;
+		if (rays[i].vert)
+			line.color = create_trgb(0, 87, 48, 138);
+		else
+			line.color = create_trgb(0, 130, 72, 207);
 		draw_rectangle(image, line);
 		i++;
 	}

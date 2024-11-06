@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 19:31:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:27:44 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_ray_h(t_player player, t_ray *ray, t_vectord *offset)
 
 	arctan = -1 / tan(player.angle);
 	ray->angle = player.angle;
+	ray->vert = false;
 	ray->color = create_trgb(0, 214, 15, 15);
 	offset->y = 0;
 	if (ray->angle == 0 || ray->angle == M_PI)
@@ -45,6 +46,7 @@ void	init_ray_v(t_player player, t_ray *ray, t_vectord *offset)
 
 	ntan = -tan(player.angle);
 	ray->angle = player.angle;
+	ray->vert = true;
 	ray->color = create_trgb(0, 118, 137, 245);
 	if (ray->angle == M_PI_2 || ray->angle == M_PI_2 * 3)
 	{
@@ -100,6 +102,8 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player, t_map map)
 	ray2.end.y *= map.wall_size;
 	ray1.len = calc_hyp(ray1.start, ray1.end);
 	ray2.len = calc_hyp(ray2.start, ray2.end);
+	if (ray1.len == ray2.len)
+		ray2.color = -1;
 	if (ray1.len < ray2.len)
 		return (ray1);
 	return (ray2);
@@ -114,7 +118,7 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 	int			i;
 
 	i = 0;
-	player.angle -= (M_PI / 180) * (FOV / 2);
+	player.angle -= ((M_PI / 180)) * (FOV / 2);
 	while (i < FOV)
 	{
 		if (player.angle < 0)
@@ -126,6 +130,11 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 		cast_ray(&ray_v, map, offset_v);
 		cast_ray(&ray_h, map, offset_h);
 		rays[i] = longer_ray(ray_v, ray_h, player, map);
+		if (rays[i].color < 0)
+		{
+			rays[i].color = rays[(i + 1) % FOV].color;
+			rays[i].vert = rays[(i + 1) % FOV].vert;
+		}
 		i++;
 		player.angle += M_PI / 180;
 	}

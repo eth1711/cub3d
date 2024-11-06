@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 19:31:00 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:27:37 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 // 4096 x 2304
 // 1920 x 1080
-# define WIN_HEIGHT 1080  
+# define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define WALL_SIZE 64
+# define WALL_SIZE 32
 # define MMAP_RATIO 25
 // # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_WIDTH
 
@@ -36,9 +36,11 @@
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
 # define DEGREE_IN_RADIANS 0.0174533
+# define FLOOR 0
+# define CEILING 0 << 24 | 104 << 16 | 116 << 8 | 212
 
 # define DOF 6
-# define FOV 60
+# define FOV 90
 
 # ifdef	__APPLE__
 

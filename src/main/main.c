@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/05 18:05:21 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:17:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	loop(void *param)
 	// printf("frame: %i\n", frame);
 	move_handler(&data->player, data->map.map);
 	look_handler(&data->player);
-	draw_background(&data->image);
 	cast_rays(data->player, data->map, rays);
+	draw_background(&data->image);
 	draw_rays_3d(&data->image, rays, data->map, data->player);
 	if (data->player.map)
 	{
