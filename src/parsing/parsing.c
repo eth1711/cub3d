@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/06 17:22:58 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/07 20:54:47 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ char **str_alloc(char *map, int *lw, int fd)
 		free(line);
 		line = get_next_line(fd);
 		*lw += 1;
-		
 	}
+	close(fd);
+	return (str);
 }
 
 int parser(char *map)

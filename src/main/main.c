@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 00:27:17 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:15:05 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	data.map.map = (char *[]){
-		"1111111",
-		"1000001",
-		"100P00111",
-		"100000101",
-		"100000111",
-		"111111111",
-		"1111111",
-		NULL
-	};
+	parser();
 	init(&data);
 	mlx_loop(data.mlx);
 }
