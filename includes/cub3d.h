@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/06 17:27:37 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:57:46 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define FLOOR 0
 # define CEILING 0 << 24 | 104 << 16 | 116 << 8 | 212
 
-# define DOF 6
-# define FOV 90
+# define DOF 20
+# define FOV 500
 
 # ifdef	__APPLE__
 
@@ -97,8 +97,8 @@ typedef struct s_vector
 
 typedef struct s_rect
 {
-	t_vectori	size;
-	t_vectori	pos;
+	t_vectord	size;
+	t_vectord	pos;
 	int			color;
 }	t_rect;
 

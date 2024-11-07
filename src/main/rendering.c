@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/06 17:20:23 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:59:28 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_background(t_image *image)
 	background.size.x = WIN_WIDTH;
 	background.color = create_trgb(0, 104, 116, 212);
 	draw_rectangle(image, background);
-	background.pos = (t_vectori){0, WIN_HEIGHT / 2};
+	background.pos = (t_vectord){0, WIN_HEIGHT / 2};
 	background.color = FLOOR;
 	draw_rectangle(image, background);
 }
@@ -32,8 +32,8 @@ void	draw_player(t_image *image, t_player player, int wall_size)
 	player.pos.x *= wall_size;
 	player.pos.y *= wall_size;
 	draw_rectangle(image, (t_rect){
-		(t_vectori){player.size, player.size},
-		(t_vectori){player.pos.x - player.size / 2,
+		(t_vectord){player.size, player.size},
+		(t_vectord){player.pos.x - player.size / 2,
 		player.pos.y - player.size / 2},
 		create_trgb(0, 255, 223, 18)
 	});
@@ -46,7 +46,7 @@ void	draw_map(t_image *image, t_map	map)
 	t_rect	wall;
 
 	y = 0;
-	wall.size = (t_vectori){map.wall_size - 1, map.wall_size - 1};
+	wall.size = (t_vectord){map.wall_size - 1, map.wall_size - 1};
 	while (map.map[y])
 	{
 		x = 0;
@@ -86,8 +86,8 @@ void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
 
 	(void)map;
 	i = 0;
-	line.size.x = WIN_WIDTH / (FOV - 5);
-	line.pos.x = -line.size.x;
+	line.size.x = WIN_WIDTH / FOV;
+	line.pos.x = 0;
 	while (i < FOV)
 	{
 		angle = player.angle - rays[i].angle;
@@ -96,7 +96,7 @@ void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
 		if (angle > M_PI * 2)
 			angle -= M_PI * 2;
 		len = rays[i].len * cos(angle);
-		line.size.y = (WALL_SIZE * WIN_WIDTH) / len;
+		line.size.y = (WALL_SIZE * WIN_HEIGHT) / len;
 		if (line.size.y > WIN_WIDTH)
 			line.size.y = WIN_WIDTH;
 		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/06 17:27:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:42:41 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 	int			i;
 
 	i = 0;
-	player.angle -= ((M_PI / 180)) * (FOV / 2);
+	player.angle -= ((M_PI / 180) * 0.1) * (FOV / 2);
 	while (i < FOV)
 	{
 		if (player.angle < 0)
@@ -136,6 +136,6 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 			rays[i].vert = rays[(i + 1) % FOV].vert;
 		}
 		i++;
-		player.angle += M_PI / 180;
+		player.angle += (M_PI / 180 ) * 0.1;
 	}
 }
