@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/07 20:15:05 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/09 01:19:45 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	parser();
-	init(&data);
-	mlx_loop(data.mlx);
+	data.map.map = parser(argv[1]);
+	// init(&data);
+	// mlx_loop(data.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 19:10:06 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/09 01:18:42 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ typedef struct s_data
 	void		*mlx;
 	void		*window;
 	bool		render_map;
-	// t_textures	textures;
 	t_image		image;
 	t_map		map;
 	t_player	player;
@@ -178,6 +177,18 @@ int		loop(void *param);
 
 //Init
 void	init(t_data *data);
+
+//Parsing
+int		check_rgb(char *line);
+int		set_texture_rgb(char *line, char **checks, bool *textures, int count);
+char	*joinstr(char *s1, char *s2);
+char	*ft_strdup2(char *src);
+char	*str_alloc(int fd);
+char	**parser(char *map);
+void	check_textures(int fd);
+void	exit_error(char *str);
+void	*ft_realloc(char **str, size_t old_size, size_t new_size);
+
 
 //Player
 void	move_handler(t_player *player, char **map);

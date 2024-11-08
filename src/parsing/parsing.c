@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/07 20:54:47 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/09 01:19:18 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ int check_rgb(char *line)
 	int cur;
 	int *values;
 	
-	values = (int){-1, -1, -1};
+	values = (int[3]){-1, -1, -1};
 	cur = 0;
 
 	while (*line && cur < 3)
 	{
 		values[cur++] = ft_atoi(line);
-		while (*line && *line != ",")
+		while (*line && *line != ',')
 			line++;
-		if (*line == ",")
+		if (*line == ',')
 			line++;
 	}
 	r = values[0];
@@ -39,33 +39,45 @@ int check_rgb(char *line)
 	return 0;
 }
 
-void set_texture_rgb(char *line, char **checks, bool *textures, int count)
+int set_texture_rgb(char *line, char **checks, bool *textures, int count)
 {
 	int cur_check;
-
+	char *str = NULL;
+	
 	cur_check = 0;
-	while (cur_check++ < 6)
+	while (cur_check < 6)
 	{
-		if (ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])) && !textures[cur_check])
+		if (!ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])))
 		{
 			line = line + ft_strlen(checks[cur_check]);
-			if (cur_check < 4 && open(line, O_RDONLY) > 0)
+			if (!textures[cur_check])
 			{
-				textures[cur_check] = 1;
-				count++;
-			}
-			else if(cur_check >= 4 && !check_rgb(line))
-			{
-				textures[cur_check] = 1;
-				count++;
+				str = ft_strdup(line);
+				if (textures[cur_check] == 1)
+					return (-1);
+				if (cur_check < 4 && ((open(str, O_RDONLY)) > 0))
+				{
+					textures[cur_check] = 1;
+					count++;
+					free(str);
+					return count;
+				}
+				else if((cur_check >= 4) && !check_rgb(line))
+				{
+					textures[cur_check] = 1;
+					count++;
+					free(str);
+					return (count);
+				}
 			}
 		}
-		else if (textures[cur_check])
-			exit_error("Duplicate found!");
-	}		
+		cur_check++;
+	}
+	free(str);
+	return (-1);
 }
 
-void check_textures(char *map, int fd)
+void check_textures(int fd)
 {
 	int 	count;
 	int		cur_check;
@@ -78,50 +90,76 @@ void check_textures(char *map, int fd)
 	count = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		set_texture_rgb(line, &checks, &textures, &count);
+		count = set_texture_rgb(line, checks, textures, count);
 		if (count == 6)
 		{
-			cur_check = 0;
-			while (cur_check++ < 6)
+			cur_check = -1;
+			while (++cur_check < 6)
 				if (!textures[cur_check])
 					exit_error("Error: Missing texture or RGB config!");
 			free(line);
-			break ;
+			return ;
 		}
 		free(line);
 	}
 }
 	
 
-char **str_alloc(char *map, int *lw, int fd)
+char *str_alloc(int fd)
 {
-	char	**str;
+	char	*str;
 	char	*line;
 	
 	str = NULL;
 	line = get_next_line(fd);
+	while(line[0] == '\n')
+	{
+		free(line);	
+		line = get_next_line(fd);
+	}
+	str = ft_strdup2(line);
+	free(line);
+	line = get_next_line(fd);
 	while (line)
 	{
-		str = ft_realloc(str, lw, lw + 2);
-		str[*lw] = line;
+		str = joinstr(str, line);
 		free(line);
 		line = get_next_line(fd);
-		*lw += 1;
 	}
 	close(fd);
 	return (str);
 }
 
-int parser(char *map)
+char **parser(char *map)
 {
-	char	**str;
-	char	*line;
-	int		lw;
+	char	*str;
+	char	**str2;
+	// int		lw;
 	int		fd;
-
+	int		i;
+	int		j;
+	
+	i = 0;
+	j = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
-	check_textures(map, fd);
-	str = str_alloc(map, &lw, fd);
+		exit_error("Couldn't open map!\n");
+	check_textures(fd);
+	str = str_alloc(fd);
+	str2 = ft_split(str, 12);
+	free(str);
+	return(str2);
+	// while(str2[i])
+	// {
+	// 	j = 0;
+	// 	while(str2[i][j])
+	// 	{
+	// 		printf("%c", str2[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	free(str2[i]);**
+	// 	i++;**
+	// }
+	// system("leaks cub3d");
 }
