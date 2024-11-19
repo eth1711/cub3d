@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/07 18:59:28 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:59:27 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
 	int		i;
 
 	(void)map;
+	(void)player;
 	i = 0;
 	line.size.x = WIN_WIDTH / FOV;
 	line.pos.x = 0;
@@ -95,10 +96,9 @@ void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
 			angle += M_PI * 2;
 		if (angle > M_PI * 2)
 			angle -= M_PI * 2;
-		len = rays[i].len * cos(angle);
+		len = (rays[i].len * cos(angle));
+		// line.size.y = ((double)WALL_SIZE * (double)WIN_HEIGHT) / rays[i].len;
 		line.size.y = (WALL_SIZE * WIN_HEIGHT) / len;
-		if (line.size.y > WIN_WIDTH)
-			line.size.y = WIN_WIDTH;
 		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;
 		line.pos.x += line.size.x;
 		if (rays[i].vert)

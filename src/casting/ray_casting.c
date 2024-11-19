@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/07 18:42:41 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:42:15 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	cast_ray(t_ray *ray, t_map map, t_vectord offset)
 	dof = 0;
 	while (dof < DOF && offset.x)
 	{
-		printf("ray.end.y %lf\n", ray->end.y);
-		printf("ray->end.x %lf\n", ray->end.x);
+		// printf("ray.end.y %lf\n", ray->end.y);
+		// printf("ray->end.x %lf\n", ray->end.x);
 		if (ray->end.x < 0 || ray->end.x > map.width
 			|| ray->end.y < 0 || ray->end.y > map.length)
 			break ;
@@ -100,8 +100,8 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player, t_map map)
 	ray1.end.y *= map.wall_size;
 	ray2.end.x *= map.wall_size;
 	ray2.end.y *= map.wall_size;
-	ray1.len = calc_hyp(ray1.start, ray1.end);
-	ray2.len = calc_hyp(ray2.start, ray2.end);
+	ray1.len = (calc_hyp(ray1.start, ray1.end));
+	ray2.len = (calc_hyp(ray2.start, ray2.end));
 	if (ray1.len == ray2.len)
 		ray2.color = -1;
 	if (ray1.len < ray2.len)
@@ -115,10 +115,12 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 	t_ray		ray_h;
 	t_vectord	offset_h;
 	t_vectord	offset_v;
+	double		angle;
 	int			i;
 
 	i = 0;
-	player.angle -= ((M_PI / 180) * 0.1) * (FOV / 2);
+	angle = (M_PI / 180) * (90 / (double)FOV);
+	player.angle -= angle * (FOV / 2);
 	while (i < FOV)
 	{
 		if (player.angle < 0)
@@ -136,6 +138,6 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 			rays[i].vert = rays[(i + 1) % FOV].vert;
 		}
 		i++;
-		player.angle += (M_PI / 180 ) * 0.1;
+		player.angle += angle;
 	}
 }

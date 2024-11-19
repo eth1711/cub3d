@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/07 18:57:46 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:37:46 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define CEILING 0 << 24 | 104 << 16 | 116 << 8 | 212
 
 # define DOF 20
-# define FOV 500
+# define FOV 1920
 
 # ifdef	__APPLE__
 
@@ -106,7 +106,7 @@ typedef struct s_ray
 {
 	t_vectord		start;
 	t_vectord		end;
-	unsigned long	len;
+	double			len;
 	bool			vert;
 	double			angle;
 	int				color;
