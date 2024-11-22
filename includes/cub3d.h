@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/19 18:37:46 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/22 21:44:02 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "fcntl.h"
 # include <math.h>
 # include <stdio.h>
 # include <time.h>
@@ -36,8 +37,6 @@
 # define PLAYER_SPEED 0.1
 # define PLAYER_SIZE 9
 # define DEGREE_IN_RADIANS 0.0174533
-# define FLOOR 0
-# define CEILING 0 << 24 | 104 << 16 | 116 << 8 | 212
 
 # define DOF 20
 # define FOV 1920
@@ -145,15 +144,15 @@ typedef struct s_player
 	bool		use;
 }	t_player;
 
-// typedef struct s_textures
-// {
-// 	void	*north;
-// 	void	*south;
-// 	void	*east;
-// 	void	*west;
-// 	int		*floor;
-// 	int		*ceiling;
-// }	t_textures;
+typedef struct s_textures
+{
+	t_image	north;
+	t_image	south;
+	t_image	east;
+	t_image	west;
+	int		floor;
+	int		ceiling;
+}	t_textures;
 
 typedef struct s_parsing
 {
@@ -170,6 +169,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*window;
 	bool		render_map;
+	t_textures	textures;
+	t_image		test;
 	t_image		image;
 	t_map		map;
 	t_player	player;
@@ -181,6 +182,7 @@ void	cast_rays(t_player player, t_map map, t_ray *rays);
 //Init
 void	init(t_data *data);
 void	init_player(t_player *player, t_map *map);
+void	init_textures(t_data *data);
 
 //Main-----------------------------------------------------
 
@@ -196,6 +198,12 @@ int		check_move(t_player *player, t_map map);
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
 void	draw_map(t_image *image, t_map map);
+void	draw_rays_2d(t_image *image, t_ray *rays);
+void	draw_rays_3d(t_image *image, t_ray *rays,
+	t_player player, t_textures textures);
+
+//Render textures
+void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray, t_textures textures);
 
 //Events
 int		on_destroy(void *param);
@@ -207,15 +215,17 @@ int		on_key_up(int key, void *param);
 //gnl
 char	*get_next_line(int fd);
 
-// Rendering Utils
+//Rendering Utils
 int		create_trgb(int t, int r, int g, int b);
 void	img_pix_put(t_image *img, int x, int y, int color);
 void	draw_rectangle(t_image *img, t_rect rect);
 void	draw_ray(t_image *img, t_ray ray);
-void	draw_rays_2d(t_image *image, t_ray *rays);
-void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player);
 
-//Ray_utils
+//Angle Utils
+double	reset_angle(double angle);
+double	deg_to_rad(double degrees);
+
+//Ray Utils
 double	calc_hyp(t_vectord side1, t_vectord side2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 21:13:03 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:22:32 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,31 @@ void	init_mlx(t_data *data)
 			&data->image.line_len,
 			&data->image.endian
 			);
+}
+
+void	init_player(t_player *player, t_map *map)
+{
+	while (map->map[(int)(player->pos.y)])
+	{
+		player->pos.x = 0;
+		while (map->map[(int)(player->pos.y)][(int)(player->pos.x)]
+			&& map->map[(int)(player->pos.y)][(int)(player->pos.x)] != 'P')
+			player->pos.x++;
+		if (map->map[(int)(player->pos.y)][(int)(player->pos.x)] == 'P')
+			break ;
+		player->pos.y++;
+	}
+	player->size = map->wall_size / 2;
+	player->angle = M_PI / 2;
+	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,
+		sin(player->angle) * PLAYER_SPEED};
+	player->m_down = false;
+	player->m_left = false;
+	player->m_right = false;
+	player->m_up = false;
+	player->l_left = false;
+	player->l_right = false;
+	player->map = true;
 }
 
 void	init(t_data *data)

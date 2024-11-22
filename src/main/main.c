@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/07 18:36:18 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:00:23 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ int	loop(void *param)
 {
 	t_data		*data;
 	t_ray		rays[FOV];
+
+	data = (t_data *)param;
 	// static int	frame;
 
 	// frame++;
-	data = (t_data *)param;
 	// printf("frame: %i\n", frame);
 	move_handler(&data->player, data->map.map);
 	look_handler(&data->player);
 	cast_rays(data->player, data->map, rays);
 	draw_background(&data->image);
-	draw_rays_3d(&data->image, rays, data->map, data->player);
+	draw_rays_3d(&data->image, rays, data->player, data->textures);
 	if (data->player.map)
 	{
 		draw_map(&data->image, data->map);

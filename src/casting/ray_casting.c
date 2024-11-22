@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/19 18:42:15 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:24:56 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,11 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 	int			i;
 
 	i = 0;
-	angle = (M_PI / 180) * (90 / (double)FOV);
+	angle = (M_PI / 180) * (60 / (double)FOV);
 	player.angle -= angle * (FOV / 2);
 	while (i < FOV)
 	{
-		if (player.angle < 0)
-			player.angle += 2 * M_PI;
-		if (player.angle > 2 * M_PI)
-			player.angle -= 2 * M_PI;
+		player.angle = reset_angle(player.angle);
 		init_ray_h(player, &ray_h, &offset_h);
 		init_ray_v(player, &ray_v, &offset_v);
 		cast_ray(&ray_v, map, offset_v);

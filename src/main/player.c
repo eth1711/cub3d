@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/30 21:57:10 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:12:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ void	look_handler(t_player *player)
 		player->angle += PLAYER_LOOK;
 	if (player->l_left)
 		player->angle -= PLAYER_LOOK;
-	if (player->angle > M_PI * 2)
-		player->angle -= M_PI * 2;
-	else if ((player->angle < 0))
-		player->angle += M_PI * 2;
+	player->angle = reset_angle(player->angle);
 	if (player->l_left ^ player->l_right)
 	{
 		player->delta.x = cos(player->angle) * PLAYER_SPEED;

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/19 18:59:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:17:03 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_background(t_image *image)
 	background.color = create_trgb(0, 104, 116, 212);
 	draw_rectangle(image, background);
 	background.pos = (t_vectord){0, WIN_HEIGHT / 2};
-	background.color = FLOOR;
+	background.color = 0;
 	draw_rectangle(image, background);
 }
 
@@ -77,34 +77,30 @@ void	draw_rays_2d(t_image *image, t_ray *rays)
 	}
 }
 
-void	draw_rays_3d(t_image *image, t_ray *rays, t_map map, t_player player)
+void	draw_rays_3d(t_image *image, t_ray *rays,
+	t_player player, t_textures textures)
 {
 	t_rect	line;
 	double	angle;
 	double	len;
 	int		i;
 
-	(void)map;
-	(void)player;
 	i = 0;
+	(void)textures;
 	line.size.x = WIN_WIDTH / FOV;
 	line.pos.x = 0;
 	while (i < FOV)
 	{
 		angle = player.angle - rays[i].angle;
-		if (angle < 0)
-			angle += M_PI * 2;
-		if (angle > M_PI * 2)
-			angle -= M_PI * 2;
+		angle = reset_angle(angle);
 		len = (rays[i].len * cos(angle));
-		// line.size.y = ((double)WALL_SIZE * (double)WIN_HEIGHT) / rays[i].len;
 		line.size.y = (WALL_SIZE * WIN_HEIGHT) / len;
 		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;
 		line.pos.x += line.size.x;
 		if (rays[i].vert)
-			line.color = create_trgb(0, 87, 48, 138);
+			line.color = create_trgb(0, 136, 3, 252);
 		else
-			line.color = create_trgb(0, 130, 72, 207);
+			line.color = create_trgb(0, 106, 0, 199);
 		draw_rectangle(image, line);
 		i++;
 	}
