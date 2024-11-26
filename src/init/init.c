@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 18:22:32 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:54:25 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	init_player(t_player *player, t_map *map)
 void	init(t_data *data)
 {
 	init_mlx(data);
+	init_textures(data);
 	init_hooks(data);
 	init_map(&data->map);
 	init_player(&data->player, &data->map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 22:17:03 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:17:43 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 			line.color = create_trgb(0, 136, 3, 252);
 		else
 			line.color = create_trgb(0, 106, 0, 199);
-		draw_rectangle(image, line);
+		// draw_rectangle(image, line);
+		draw_textured_ray(image, line, rays[i], textures);
 		i++;
 	}
 }

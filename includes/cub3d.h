@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 21:44:02 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:25:38 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@
 # define DOF 20
 # define FOV 1920
 
-# ifdef	__APPLE__
+# ifdef __APPLE__
 
-enum {
+enum
+{
 	ON_DESTROY = 17,
 	ON_KEY_DOWN = 2,
 	KEY_ESC = 53,
@@ -58,7 +59,8 @@ enum {
 };
 # elif __linux__
 
-enum {
+enum
+{
 	ON_DESTROY = 17,
 	ON_KEY_DOWN = 2,
 	KEY_ESC = XK_Escape,
@@ -114,7 +116,7 @@ typedef struct s_ray
 typedef struct s_image
 {
 	void		*image;
-	void		*addr;
+	char		*addr;
 	int			line_len;
 	int			bpp;
 	int			endian;
@@ -170,11 +172,12 @@ typedef struct s_data
 	void		*window;
 	bool		render_map;
 	t_textures	textures;
-	t_image		test;
 	t_image		image;
 	t_map		map;
 	t_player	player;
 }	t_data;
+
+void	set_mlx_image(t_image *image);
 
 //Casting
 void	cast_rays(t_player player, t_map map, t_ray *rays);

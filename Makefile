@@ -4,7 +4,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3 -O3 #-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
 
 ifeq ($(shell uname), Linux)
 	MLX = lib/minilibx-linux

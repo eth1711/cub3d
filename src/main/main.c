@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 22:00:23 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:40:33 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int	main(int argc, char **argv)
 		NULL
 	};
 	init(&data);
+	printf("line len: %i\n", data.textures.north.line_len);
+	printf("bpp: %i\n", data.textures.north.bpp);
 	mlx_loop(data.mlx);
 }

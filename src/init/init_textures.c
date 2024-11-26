@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:23:22 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 20:13:51 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:14:10 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	set_mlx_image(t_image *image)
 
 void	init_textures(t_data *data)
 {
+	int	x;
+	int	y;
+
 	data->textures.north.image = mlx_xpm_file_to_image(
-			data->mlx, "textures/cat.png", &((int){32}), &((int){32}));
-	set_mlx_image(data->textures.north.image);
+			data->mlx, "./textures/eyefloor.xpm", &x, &y);
+	set_mlx_image(&data->textures.north);
 	// data->textures.south = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
 	// data->textures.east = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
 	// data->textures.west = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
