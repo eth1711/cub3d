@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/26 14:17:43 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:00:34 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 	int		i;
 
 	i = 0;
-	(void)textures;
 	line.size.x = WIN_WIDTH / FOV;
 	line.pos.x = 0;
 	while (i < FOV)
@@ -101,7 +100,6 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 			line.color = create_trgb(0, 136, 3, 252);
 		else
 			line.color = create_trgb(0, 106, 0, 199);
-		// draw_rectangle(image, line);
 		draw_textured_ray(image, line, rays[i], textures);
 		i++;
 	}

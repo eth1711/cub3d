@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:43:47 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/26 14:38:19 by pringles         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:06:51 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ void	draw_textured_ray(t_image *img, t_rect rect,
 	(void)ray;
 	xy.x = 0;
 	xy.y = xy.x;
-	color.y = 0;
-	color.x = (int)(ray.end.x) % 32;
-	tstep.y = 64/rect.size.y;
+	color.y = 0;;
+	color.x = (int)(ray.end.x) % WALL_SIZE;
+	tstep.y = 32 / rect.size.y;
 	while (xy.y < rect.size.y && xy.y + rect.pos.y <= WIN_HEIGHT
 		&& xy.x + rect.pos.x <= WIN_WIDTH)
 	{
 		xy.x = 0;
 		while (xy.x < rect.size.x && xy.y + rect.pos.y >= 0)
 		{
-			rect.color = textures.north.addr[(char)(color.y) * textures.north.line_len + (char)(color.x) * (textures.north.bpp/8)];
-			rect.color = (rect.color << 8) & 0xFF;
+			rect.color = ((int *)textures.north.addr)[(int)(color.y) * textures.north.line_len/sizeof(int) + (int)(color.x) * (textures.north.bpp/8)];
 			if (xy.x + rect.pos.x >= 0)
 				img_pix_put(img, (xy.x + rect.pos.x), (xy.y + rect.pos.y),
 					rect.color);
