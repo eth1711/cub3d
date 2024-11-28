@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/27 18:07:08 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:42:56 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define DEGREE_IN_RADIANS 0.0174533
 
 # define DOF 20
-# define FOV 1920
+# define RAYS 1920
 
 # ifdef __APPLE__
 
@@ -201,12 +201,12 @@ int		check_move(t_player *player, t_map map);
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image);
 void	draw_map(t_image *image, t_map map);
-void	draw_rays_2d(t_image *image, t_ray *rays);
+void	draw_rays_2d(t_image *image, t_ray *rays, int map_size);
 void	draw_rays_3d(t_image *image, t_ray *rays,
-	t_player player, t_textures textures);
+	t_player player, t_textures textures, t_map map);
 
 //Render textures
-void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray, t_textures textures);
+void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray, t_textures textures, t_map map);
 
 //Events
 int		on_destroy(void *param);

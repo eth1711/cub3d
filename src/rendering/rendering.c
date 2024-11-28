@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/27 17:00:34 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:42:55 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,25 @@ void	draw_map(t_image *image, t_map	map)
 	}
 }
 
-void	draw_rays_2d(t_image *image, t_ray *rays)
+void	draw_rays_2d(t_image *image, t_ray *rays, int map_size)
 {
 	int	i;
 
 	i = 0;
-	while (i < FOV)
+	while (i < RAYS)
 	{
+		rays[i].end.x *= map_size;
+		rays[i].end.y *= map_size;
+		rays[i].start.x *= map_size;
+		rays[i].start.y *= map_size;
+		rays[i].len *= map_size;
 		draw_ray(image, rays[i]);
 		i++;
 	}
 }
 
 void	draw_rays_3d(t_image *image, t_ray *rays,
-	t_player player, t_textures textures)
+	t_player player, t_textures textures, t_map map)
 {
 	t_rect	line;
 	double	angle;
@@ -86,21 +91,21 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 	int		i;
 
 	i = 0;
-	line.size.x = WIN_WIDTH / FOV;
+	line.size.x = WIN_WIDTH / RAYS;
 	line.pos.x = 0;
-	while (i < FOV)
+	while (i < RAYS)
 	{
 		angle = player.angle - rays[i].angle;
 		angle = reset_angle(angle);
 		len = (rays[i].len * cos(angle));
-		line.size.y = (WALL_SIZE * WIN_HEIGHT) / len;
+		line.size.y = (WIN_HEIGHT) / len;
 		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;
 		line.pos.x += line.size.x;
 		if (rays[i].vert)
 			line.color = create_trgb(0, 136, 3, 252);
 		else
 			line.color = create_trgb(0, 106, 0, 199);
-		draw_textured_ray(image, line, rays[i], textures);
+		draw_textured_ray(image, line, rays[i], textures, map);
 		i++;
 	}
 }

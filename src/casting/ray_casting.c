@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 17:24:56 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:42:20 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,10 @@ void	cast_ray(t_ray *ray, t_map map, t_vectord offset)
 	}
 }
 
-t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player, t_map map)
+t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player)
 {
-	ray1.start = (t_vectord)
-	{player.pos.x * map.wall_size, player.pos.y * map.wall_size};
-	ray2.start = ray1.start;
-	ray1.end.x *= map.wall_size;
-	ray1.end.y *= map.wall_size;
-	ray2.end.x *= map.wall_size;
-	ray2.end.y *= map.wall_size;
+	ray1.start = player.pos;
+	ray2.start = player.pos;
 	ray1.len = (calc_hyp(ray1.start, ray1.end));
 	ray2.len = (calc_hyp(ray2.start, ray2.end));
 	if (ray1.len == ray2.len)
@@ -119,20 +114,20 @@ void	cast_rays(t_player player, t_map map, t_ray *rays)
 	int			i;
 
 	i = 0;
-	angle = (M_PI / 180) * (60 / (double)FOV);
-	player.angle -= angle * (FOV / 2);
-	while (i < FOV)
+	angle = (M_PI / 180) * (60 / (double)RAYS);
+	player.angle -= angle * (RAYS / 2);
+	while (i < RAYS)
 	{
 		player.angle = reset_angle(player.angle);
 		init_ray_h(player, &ray_h, &offset_h);
 		init_ray_v(player, &ray_v, &offset_v);
 		cast_ray(&ray_v, map, offset_v);
 		cast_ray(&ray_h, map, offset_h);
-		rays[i] = longer_ray(ray_v, ray_h, player, map);
+		rays[i] = longer_ray(ray_v, ray_h, player);
 		if (rays[i].color < 0)
 		{
-			rays[i].color = rays[(i + 1) % FOV].color;
-			rays[i].vert = rays[(i + 1) % FOV].vert;
+			rays[i].color = rays[(i + 1) % RAYS].color;
+			rays[i].vert = rays[(i + 1) % RAYS].vert;
 		}
 		i++;
 		player.angle += angle;
