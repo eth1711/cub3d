@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/28 20:42:56 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:50:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,10 +203,11 @@ void	draw_background(t_image *image);
 void	draw_map(t_image *image, t_map map);
 void	draw_rays_2d(t_image *image, t_ray *rays, int map_size);
 void	draw_rays_3d(t_image *image, t_ray *rays,
-	t_player player, t_textures textures, t_map map);
+			t_player player, t_textures textures);
 
 //Render textures
-void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray, t_textures textures, t_map map);
+void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray,
+			t_textures textures);
 
 //Events
 int		on_destroy(void *param);

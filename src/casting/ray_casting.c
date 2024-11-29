@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/28 20:42:20 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:43:17 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_ray_h(t_player player, t_ray *ray, t_vectord *offset)
 	ray->angle = player.angle;
 	ray->vert = false;
 	ray->color = create_trgb(0, 214, 15, 15);
-	offset->y = 0;
 	if (ray->angle == 0 || ray->angle == M_PI)
 	{
 		ray->end = (t_vectord){1000000, 1000000};
@@ -75,8 +74,6 @@ void	cast_ray(t_ray *ray, t_map map, t_vectord offset)
 	dof = 0;
 	while (dof < DOF && offset.x)
 	{
-		// printf("ray.end.y %lf\n", ray->end.y);
-		// printf("ray->end.x %lf\n", ray->end.x);
 		if (ray->end.x < 0 || ray->end.x > map.width
 			|| ray->end.y < 0 || ray->end.y > map.length)
 			break ;
@@ -97,8 +94,8 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player)
 	ray2.start = player.pos;
 	ray1.len = (calc_hyp(ray1.start, ray1.end));
 	ray2.len = (calc_hyp(ray2.start, ray2.end));
-	if (ray1.len == ray2.len)
-		ray2.color = -1;
+	// if (ray1.len == ray2.len)
+	// 	ray2.color = -1;
 	if (ray1.len < ray2.len)
 		return (ray1);
 	return (ray2);

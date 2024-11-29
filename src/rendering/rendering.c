@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/28 22:42:55 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:45:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_rays_2d(t_image *image, t_ray *rays, int map_size)
 }
 
 void	draw_rays_3d(t_image *image, t_ray *rays,
-	t_player player, t_textures textures, t_map map)
+	t_player player, t_textures textures)
 {
 	t_rect	line;
 	double	angle;
@@ -105,7 +105,7 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 			line.color = create_trgb(0, 136, 3, 252);
 		else
 			line.color = create_trgb(0, 106, 0, 199);
-		draw_textured_ray(image, line, rays[i], textures, map);
+		draw_textured_ray(image, line, rays[i], textures);
 		i++;
 	}
 }
