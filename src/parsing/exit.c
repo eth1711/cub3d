@@ -1,45 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 17:05:13 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/08 23:45:28 by etlim            ###   ########.fr       */
+/*   Created: 2024/10/30 22:11:33 by etlim             #+#    #+#             */
+/*   Updated: 2024/11/04 18:09:50 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "cub3d.h"
 
-static int	len(char *str)
+void exit_error(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strdup(char *src)
-{
-	int		i;
-	char	*dest;
-
-	dest = (char *)malloc(len(src) * sizeof(char) + 1);
-	if (!(dest))
-	{
-		return (NULL);
-	}
-	i = 0;
-	while (src[i + 1] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	ft_putstr_fd(str, 2);
+	exit(1);
 }

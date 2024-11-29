@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 16:17:23 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:48:01 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,7 @@ int	main(int argc, char **argv)
 	printf("line len: %i\n", data.textures.north.line_len);
 	printf("bpp: %i\n", data.textures.north.bpp);
 	mlx_loop(data.mlx);
+	data.map.map = parser(argv[1]);
+	// init(&data);
+	// mlx_loop(data.mlx);
 }

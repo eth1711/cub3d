@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 18:08:01 by amaligno          #+#    #+#             */
-/*   Updated: 2022/11/17 15:55:43 by amaligno         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   ft_split.c                                         :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2022/10/20 18:08:01 by amaligno          #+#    #+#             */
+// /*   Updated: 2022/11/17 15:55:43 by amaligno         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
@@ -115,24 +115,24 @@ char	**ft_split(char const *s, char c)
 	return (words);
 }
 
-// int	main(void)
-// {
-// 	char	**strs;
+// // int	main(void)
+// // {
+// // 	char	**strs;
 
-// 	strs = ft_split("--12345-678-", '-');
-// 	printf("[%s]\n", strs[0]);
-// 	printf("[%s]\n", strs[1]);
-// 	// printf("%s\n", strs[2]);
-// 	// printf("%s\n", strs[3]);
-// 	// printf("%s\n", strs[4]);
-// 	// printf("%s\n", strs[5]);
-// }
+// // 	strs = ft_split("--12345-678-", '-');
+// // 	printf("[%s]\n", strs[0]);
+// // 	printf("[%s]\n", strs[1]);
+// // 	// printf("%s\n", strs[2]);
+// // 	// printf("%s\n", strs[3]);
+// // 	// printf("%s\n", strs[4]);
+// // 	// printf("%s\n", strs[5]);
+// // }
 
-// int main(int c, char **str)
-// {
-// 	char **strs = ft_split(str[1], str[2][0]);
-// 	printf("[%s]\n", strs[0]);
-// 	printf("[%s]\n", strs[1]);
-// 	printf("%s\n", strs[2]);
-// 	printf("%s\n", strs[3]);
-// }
+// // int main(int c, char **str)
+// // {
+// // 	char **strs = ft_split(str[1], str[2][0]);
+// // 	printf("[%s]\n", strs[0]);
+// // 	printf("[%s]\n", strs[1]);
+// // 	printf("%s\n", strs[2]);
+// // 	printf("%s\n", strs[3]);
+// // }
