@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/09 01:19:18 by etlim            ###   ########.fr       */
+/*   Updated: 2024/11/29 17:15:44 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int check_rgb(char *line)
+int	check_rgb(char *line)
 {
-	int r;
-	int g;
-	int b;
-	int cur;
-	int *values;
-	
-	values = (int[3]){-1, -1, -1};
-	cur = 0;
+	int	r;
+	int	g;
+	int	b;
+	int	cur;
+	int	*values;
 
+	values = (int [3]){-1, -1, -1};
+	cur = 0;
 	while (*line && cur < 3)
 	{
 		values[cur++] = ft_atoi(line);
@@ -34,16 +33,17 @@ int check_rgb(char *line)
 	r = values[0];
 	g = values[1];
 	b = values[2];
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 )
-		return -1;
-	return 0;
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (-1);
+	return (0);
 }
 
-int set_texture_rgb(char *line, char **checks, bool *textures, int count)
+int	set_texture_rgb(char *line, char **checks, bool *textures, int count)
 {
-	int cur_check;
-	char *str = NULL;
-	
+	int		cur_check;
+	char	*str;
+
+	str = NULL;
 	cur_check = 0;
 	while (cur_check < 6)
 	{
@@ -60,9 +60,9 @@ int set_texture_rgb(char *line, char **checks, bool *textures, int count)
 					textures[cur_check] = 1;
 					count++;
 					free(str);
-					return count;
+					return (count);
 				}
-				else if((cur_check >= 4) && !check_rgb(line))
+				else if ((cur_check >= 4) && !check_rgb(line))
 				{
 					textures[cur_check] = 1;
 					count++;
@@ -77,16 +77,16 @@ int set_texture_rgb(char *line, char **checks, bool *textures, int count)
 	return (-1);
 }
 
-void check_textures(int fd)
+void	check_textures(int fd)
 {
-	int 	count;
+	int		count;
 	int		cur_check;
 	bool	*textures;
 	char	*line;
 	char	**checks;
 
 	textures = (bool[6]){0, 0, 0, 0, 0, 0};
-	checks = (char*[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
+	checks = (char *[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
 	count = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
@@ -103,18 +103,17 @@ void check_textures(int fd)
 		free(line);
 	}
 }
-	
 
-char *str_alloc(int fd)
+char	*str_alloc(int fd)
 {
 	char	*str;
 	char	*line;
-	
+
 	str = NULL;
 	line = get_next_line(fd);
-	while(line[0] == '\n')
+	while (line[0] == '\n')
 	{
-		free(line);	
+		free(line);
 		line = get_next_line(fd);
 	}
 	str = ft_strdup2(line);
@@ -130,15 +129,15 @@ char *str_alloc(int fd)
 	return (str);
 }
 
-char **parser(char *map)
+char	**parser(char *map)
 {
-	char	*str;
-	char	**str2;
+	char *str;
+	char **str2;
 	// int		lw;
-	int		fd;
-	int		i;
-	int		j;
-	
+	int fd;
+	int i;
+	int j;
+
 	i = 0;
 	j = 0;
 	fd = open(map, O_RDONLY);
@@ -148,7 +147,7 @@ char **parser(char *map)
 	str = str_alloc(fd);
 	str2 = ft_split(str, 12);
 	free(str);
-	return(str2);
+	return (str2);
 	// while(str2[i])
 	// {
 	// 	j = 0;

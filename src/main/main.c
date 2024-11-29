@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 16:48:01 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:26:14 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
+	// if (argc != 2)
+	// {
+	// 	ft_putstr_fd("Incorrect argument amount", STDERR_FILENO);
+	// 	return (1);
+	// }
+	data.map.map = parser(argv[1]);
 	data.map.map = (char *[]){
 		"1111111111111",
 		"1000000000111",
@@ -59,7 +65,4 @@ int	main(int argc, char **argv)
 	printf("line len: %i\n", data.textures.north.line_len);
 	printf("bpp: %i\n", data.textures.north.bpp);
 	mlx_loop(data.mlx);
-	data.map.map = parser(argv[1]);
-	// init(&data);
-	// mlx_loop(data.mlx);
 }

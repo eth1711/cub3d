@@ -1,7 +1,7 @@
-NO ./textures/N.xpm
-SO ./textures/S.xpm
-EA ./textures/E.xpm
-WE ./textures/W.xpm
+NO ./textures/cat_32.xpm
+SO ./textures/eyefloor.xpm
+EA ./textures/mario.xpm
+WE ./textures/funny.xpm
 F 00,22,25
 C 100,29,122
 

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 16:50:26 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:36:33 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,9 @@ typedef struct s_ray
 typedef struct s_image
 {
 	void		*image;
-	char		*addr;
+	void		*addr;
 	int			line_len;
+	int			height;
 	int			bpp;
 	int			endian;
 }	t_image;
@@ -233,7 +234,7 @@ char	*get_next_line(int fd);
 
 //Rendering Utils
 int		create_trgb(int t, int r, int g, int b);
-void	img_pix_put(t_image *img, int x, int y, int color);
+void	img_pix_put(t_image *img, int x, int y, unsigned int color);
 void	draw_rectangle(t_image *img, t_rect rect);
 void	draw_ray(t_image *img, t_ray ray);
 

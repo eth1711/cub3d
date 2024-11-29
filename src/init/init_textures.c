@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:23:22 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/28 22:46:59 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:45:41 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ void	set_mlx_image(t_image *image)
 			);
 }
 
-void	init_textures(t_data *data)
+void	set_image_struct(void *mlx, t_image *image, char *path)
 {
 	int	x;
-	int	y;
 
-	data->textures.north.image = mlx_xpm_file_to_image(
-			data->mlx, "./textures/mario.xpm", &x, &y);
-	set_mlx_image(&data->textures.north);
-	// data->textures.south = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
-	// data->textures.east = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
-	// data->textures.west = mlx_xpm_file_to_image(data->mlx, "", 32, 32);
+	image->image = mlx_xpm_file_to_image(mlx, path, &x, &image->height);
+	set_mlx_image(image);
+}
+
+void	init_textures(t_data *data)
+{
+	set_image_struct(data->mlx, &data->textures.north, "textures/mario.xpm");
+	set_image_struct(data->mlx, &data->textures.east, "textures/cat_32.xpm");
+	set_image_struct(data->mlx, &data->textures.south, "textures/funny.xpm");
+	set_image_struct(data->mlx, &data->textures.west, "textures/funny_me.xpm");
 }

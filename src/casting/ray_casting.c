@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 15:43:17 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:21:44 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player)
 	ray1.len = (calc_hyp(ray1.start, ray1.end));
 	ray2.len = (calc_hyp(ray2.start, ray2.end));
 	// if (ray1.len == ray2.len)
-	// 	ray2.color = -1;
+	// {
+	// 	ray1.end.
+	// }
 	if (ray1.len < ray2.len)
 		return (ray1);
 	return (ray2);
