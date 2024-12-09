@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:30 by pringles          #+#    #+#             */
-/*   Updated: 2024/12/09 15:33:48 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:44:13 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	set_pos(t_player *player, t_map *map, char *c)
 			*c = map->str[(int)(player->pos.y)][(int)(player->pos.x)];
 		}
 		if (*c && ft_strchr("NSWE", *c))
+		{
+			map->str[(int)player->pos.y][(int)player->pos.y] = '0';
 			break ;
+		}
 		player->pos.y += 1;
 	}
 }

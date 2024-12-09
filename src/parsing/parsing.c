@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/09 10:26:41 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:06:26 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	set_texture_rgb(char *line, char **checks, bool *textures, int count)
 	return (-1);
 }
 
-void	check_textures(int fd)
+void	check_textures(int fd, t_textures *txtrs)
 {
 	int		count;
 	int		cur_check;
@@ -129,7 +129,7 @@ char	*str_alloc(int fd)
 	return (str);
 }
 
-char	**parser(char *map)
+char	**parser(char *map, t_textures *textures)
 {
 	char *str;
 	char **str2;
@@ -145,7 +145,7 @@ char	**parser(char *map)
 		exit_error("Couldn't open map!\n");
 	check_textures(fd);
 	str = str_alloc(fd);
-	str2 = ft_split(str, 12);
+	str2 = ft_split(str, '\n');
 	free(str);
 	return (str2);
 	// while(str2[i])

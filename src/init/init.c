@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 14:58:39 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:54:33 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_hooks(t_data *data)
 
 void	init_map(t_map *map)
 {
-	char	*tmp;
 	int		m_size;
 	int		y;
 	int		x;
@@ -31,9 +30,6 @@ void	init_map(t_map *map)
 	x = 0;
 	map->width = 0;
 	map->length = 0;
-	tmp = *map->str;
-	map->str = ft_split(tmp, '\n');
-	free(tmp);
 	while (map->str[y])
 	{
 		x = 0;
