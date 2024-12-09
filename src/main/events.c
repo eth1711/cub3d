@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:21 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 22:28:48 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:30:19 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	on_key_down(int key, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	// printf("key pressed: %i\n", key);
 	if (key == KEY_W)
 		data->player.m_up = true;
 	else if (key == KEY_S)

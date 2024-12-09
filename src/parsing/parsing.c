@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/29 17:15:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:26:41 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,11 @@ char	**parser(char *map)
 	char **str2;
 	// int		lw;
 	int fd;
-	int i;
-	int j;
+	// int i;
+	// int j;
 
-	i = 0;
-	j = 0;
+	// i = 0;
+	// j = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		exit_error("Couldn't open map!\n");

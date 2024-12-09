@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 17:26:14 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:30:05 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ int	loop(void *param)
 	t_ray		rays[RAYS];
 
 	data = (t_data *)param;
-	// static int	frame;
-
-	// frame++;
-	// printf("frame: %i\n", frame);
 	move_handler(&data->player, data->map.map);
 	look_handler(&data->player);
 	cast_rays(data->player, data->map, rays);
@@ -48,7 +44,7 @@ int	main(int argc, char **argv)
 	// 	ft_putstr_fd("Incorrect argument amount", STDERR_FILENO);
 	// 	return (1);
 	// }
-	data.map.map = parser(argv[1]);
+	// data.map.map = parser(argv[1]);
 	data.map.map = (char *[]){
 		"1111111111111",
 		"1000000000111",

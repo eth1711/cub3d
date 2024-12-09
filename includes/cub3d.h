@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 18:36:33 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:38:21 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define DEGREE_IN_RADIANS 0.0174533
 
 # define DOF 20
+# define FOV 60
 # define RAYS 1920
 
 # ifdef __APPLE__
@@ -120,6 +121,7 @@ typedef struct s_image
 	void		*addr;
 	int			line_len;
 	int			height;
+	int			width;
 	int			bpp;
 	int			endian;
 }	t_image;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 18:21:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:34:24 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,6 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player)
 	ray2.start = player.pos;
 	ray1.len = (calc_hyp(ray1.start, ray1.end));
 	ray2.len = (calc_hyp(ray2.start, ray2.end));
-	// if (ray1.len == ray2.len)
-	// {
-	// 	ray1.end.
-	// }
 	if (ray1.len < ray2.len)
 		return (ray1);
 	return (ray2);
@@ -105,29 +101,22 @@ t_ray	longer_ray(t_ray ray1, t_ray ray2, t_player player)
 
 void	cast_rays(t_player player, t_map map, t_ray *rays)
 {
-	t_ray		ray_v;
-	t_ray		ray_h;
-	t_vectord	offset_h;
-	t_vectord	offset_v;
+	t_ray		ray_vh[2];
+	t_vectord	offset_vh[2];
 	double		angle;
 	int			i;
 
 	i = 0;
-	angle = (M_PI / 180) * (60 / (double)RAYS);
+	angle = (M_PI / 180) * (FOV / (double)RAYS);
 	player.angle -= angle * (RAYS / 2);
 	while (i < RAYS)
 	{
 		player.angle = reset_angle(player.angle);
-		init_ray_h(player, &ray_h, &offset_h);
-		init_ray_v(player, &ray_v, &offset_v);
-		cast_ray(&ray_v, map, offset_v);
-		cast_ray(&ray_h, map, offset_h);
-		rays[i] = longer_ray(ray_v, ray_h, player);
-		if (rays[i].color < 0)
-		{
-			rays[i].color = rays[(i + 1) % RAYS].color;
-			rays[i].vert = rays[(i + 1) % RAYS].vert;
-		}
+		init_ray_h(player, &ray_vh[0], &offset_vh[0]);
+		init_ray_v(player, &ray_vh[1], &offset_vh[1]);
+		cast_ray(&ray_vh[1], map, offset_vh[1]);
+		cast_ray(&ray_vh[0], map, offset_vh[0]);
+		rays[i] = longer_ray(ray_vh[1], ray_vh[0], player);
 		i++;
 		player.angle += angle;
 	}
