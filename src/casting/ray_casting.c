@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:06:50 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 13:15:14 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:51:37 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	cast_ray(t_ray *ray, t_map map, t_vectord offset)
 	dof = 0;
 	while (dof < DOF && offset.x)
 	{
-		if (ray->end.y < 0 || ray->end.y > map.length
-			|| ray->end.x < 0 || ray->end.x > map.width)
+		if (ray->end.y < 0 || ray->end.y >= map.length
+			|| ray->end.x < 0
+			|| ray->end.x >= ft_strlen(map.str[(int)ray->end.y]))
 			break ;
 		if (map.str[(int)ray->end.y][(int)ray->end.x] == '1')
 			break ;
