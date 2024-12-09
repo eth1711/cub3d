@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 10:30:05 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:16:23 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	loop(void *param)
 	t_ray		rays[RAYS];
 
 	data = (t_data *)param;
-	move_handler(&data->player, data->map.map);
+	move_handler(&data->player, data->map.str);
 	look_handler(&data->player);
 	cast_rays(data->player, data->map, rays);
 	draw_background(&data->image);
@@ -37,28 +37,18 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
-	// if (argc != 2)
-	// {
-	// 	ft_putstr_fd("Incorrect argument amount", STDERR_FILENO);
-	// 	return (1);
-	// }
-	// data.map.map = parser(argv[1]);
-	data.map.map = (char *[]){
-		"1111111111111",
-		"1000000000111",
-		"100P001110111",
-		"1001111110111",
-		"1000000000001",
-		"1000001110001",
-		"1000001110001",
-		"1000000000111",
-		"1111111111111",
-		NULL
-	};
+	if (argc != 2)
+	{
+		ft_putstr_fd("Incorrect argument amount\n", STDERR_FILENO);
+		return (1);
+	}
+	data.map.str = parser(argv[1]);
 	init(&data);
-	printf("line len: %i\n", data.textures.north.line_len);
-	printf("bpp: %i\n", data.textures.north.bpp);
+	// printf("map:\n");
+	// for (int i = 0; data.map.str[i]; i++)
+	// 	printf("[%i]: %s\n", i, data.map.str[i]);
+	// printf("\nend\n");
+	printf("map.width: %i\n", data.map.width);
+	printf("map.length: %i	\n", data.map.length);
 	mlx_loop(data.mlx);
 }

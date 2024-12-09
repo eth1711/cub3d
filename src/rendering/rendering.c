@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/29 15:45:21 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:51:01 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	draw_map(t_image *image, t_map	map)
 
 	y = 0;
 	wall.size = (t_vectord){map.wall_size - 1, map.wall_size - 1};
-	while (map.map[y])
+	while (map.str[y])
 	{
 		x = 0;
-		while (map.map[y][x] && map.map[y][x])
+		while (map.str[y][x] && map.str[y][x])
 		{
-			if (map.map[y][x] == '1')
+			if (map.str[y][x] == '1')
 				wall.color = create_trgb(0, 0, 0, 0);
-			else if (map.map[y][x] == '0')
+			else if (map.str[y][x] == '0')
 				wall.color = create_trgb(0, 255, 255, 255);
 			wall.pos.x = x * map.wall_size;
 			wall.pos.y = y * map.wall_size;

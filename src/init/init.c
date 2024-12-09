@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/26 13:54:25 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:58:39 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_hooks(t_data *data)
 
 void	init_map(t_map *map)
 {
+	char	*tmp;
 	int		m_size;
 	int		y;
 	int		x;
@@ -30,10 +31,13 @@ void	init_map(t_map *map)
 	x = 0;
 	map->width = 0;
 	map->length = 0;
-	while (map->map[y])
+	tmp = *map->str;
+	map->str = ft_split(tmp, '\n');
+	free(tmp);
+	while (map->str[y])
 	{
 		x = 0;
-		while (map->map[y][x])
+		while (map->str[y][x])
 			x++;
 		if (x > map->width)
 			map->width = x;
@@ -58,36 +62,11 @@ void	init_mlx(t_data *data)
 			);
 }
 
-void	init_player(t_player *player, t_map *map)
-{
-	while (map->map[(int)(player->pos.y)])
-	{
-		player->pos.x = 0;
-		while (map->map[(int)(player->pos.y)][(int)(player->pos.x)]
-			&& map->map[(int)(player->pos.y)][(int)(player->pos.x)] != 'P')
-			player->pos.x++;
-		if (map->map[(int)(player->pos.y)][(int)(player->pos.x)] == 'P')
-			break ;
-		player->pos.y++;
-	}
-	player->size = map->wall_size / 2;
-	player->angle = M_PI / 2;
-	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,
-		sin(player->angle) * PLAYER_SPEED};
-	player->m_down = false;
-	player->m_left = false;
-	player->m_right = false;
-	player->m_up = false;
-	player->l_left = false;
-	player->l_right = false;
-	player->map = true;
-}
-
 void	init(t_data *data)
 {
+	init_map(&data->map);
 	init_mlx(data);
 	init_textures(data);
 	init_hooks(data);
-	init_map(&data->map);
 	init_player(&data->player, &data->map);
 }

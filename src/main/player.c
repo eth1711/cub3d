@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/22 18:12:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:51:01 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	look_handler(t_player *player)
 }
 
 // printf("Player pos: (%lf, %lf)\n", player->pos.x, player->pos.y);
-// printf("Next grid valy: %c\n",map.map[(int)(player->pos.y + ( player->delta.y
+// printf("Next grid valy: %c\n",map.str[(int)(player->pos.y + ( player->delta.y
 // + PLAYER_HITBOX) * sign)][(int)player->pos.x]);
 // printf("Next grid x: %c\n",
-	// map.map[(int)player->pos.y][(int)(player->pos.x
+	// map.str[(int)player->pos.y][(int)(player->pos.x
 // + (player->delta.x + PLAYER_HITBOX) * sign)]);
 // printf("Next grid pos y: %i\n",
 // (int)(player->pos.y + (player->delta.y + PLAYER_HITBOX) * sign));

@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 10:38:21 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:59:11 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ enum
 };
 # endif
 
-enum e_parsing{
+enum e_parsing
+{
 	NO,
 	SO,
 	EA,
@@ -128,7 +129,7 @@ typedef struct s_image
 
 typedef struct s_map
 {
-	char		**map;
+	char		**str;
 	int			wall_size;
 	int			length;
 	int			width;

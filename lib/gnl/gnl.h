@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:05:57 by amaligno          #+#    #+#             */
-/*   Updated: 2024/10/29 22:12:08 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:01:56 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef gnl_H
-# define gnl_H
+#ifndef GNL_H
+# define GNL_H
 
 # include <stdio.h>
 # include <string.h>
