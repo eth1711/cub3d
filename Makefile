@@ -1,5 +1,9 @@
 SRC = $(wildcard src/*/*.c)
 
+SRC_BONUS = $(wildcard src_bonus/*/*.c)
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
 OBJ = $(SRC:.c=.o)
 
 CC = cc
@@ -20,9 +24,10 @@ LINKER = -L./lib/Libft -L $(MLX) -L./lib/gnl -lgnl -lft -lm -lmlx $(LINKER_FLAGS
 
 NAME = cub3d
 
-%.o : %.c
-	@echo Compiling $<
-	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $< 
+NAME_BONUS = cub3d_bonus
+
+all : $(NAME)
+	@echo $(NAME) Done !
 
 $(NAME) : $(OBJ)
 	@make -C $(MLX)
@@ -30,16 +35,28 @@ $(NAME) : $(OBJ)
 	@make -C lib/gnl
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
 
-all : $(NAME)
-	@echo $(NAME) Done !
+$(NAME_BONUS) : $(OBJ_BONUS)
+	make -C $(MLX)
+	make -C lib/Libft
+	make -C lib/gnl
+	$(CC) $(FLAGS) $(OBJ_BONUS) -o $(NAME_BONUS) $(LINKER)
+
+%.o : %.c
+	@echo Compiling $<
+	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $< 
+
+bonus : $(NAME_BONUS)
+	echo $(NAME_BONUS) Done !
 
 clean :
 	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_BONUS)
 	@make clean -C ./lib/Libft
 	@make clean -C ./lib/gnl
 
 fclean : clean
 	@rm -rf $(NAME)
+	@rm -rf $(NAME_BONUS)
 	@make fclean -C ./lib/gnl
 	@make clean -C ./lib/Libft
 

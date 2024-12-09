@@ -6,7 +6,7 @@
 /*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:29:05 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 17:11:34 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:00:02 by pringles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,28 @@ void	move_and_check(t_player *player, char **map, t_vectord hitbox)
 	int	sign;
 
 	sign = 1;
+	(void)map;
+	(void)hitbox;
 	if (player->m_up ^ player->m_down)
 	{
 		if (player->m_down)
 			sign = -1;
-		if (map[(int)(player->pos.y + hitbox.y * sign)]
-			[(int)player->pos.x] != '1')
+		// if (map[(int)(player->pos.y + hitbox.y * sign)]
+		// 	[(int)player->pos.x] != '1')
 		player->pos.y += player->delta.y * sign;
-		if (map[(int)player->pos.y]
-			[(int)(player->pos.x + hitbox.x * sign)] != '1')
+		// if (map[(int)player->pos.y]
+		// 	[(int)(player->pos.x + hitbox.x * sign)] != '1')
 		player->pos.x += player->delta.x * sign;
 	}
 	if (player->m_left ^ player->m_right)
 	{
 		if (player->m_left)
 			sign = -1;
-		if (map[(int)(player->pos.y + hitbox.x * sign)]
-			[(int)player->pos.x] != '1')
+		// if (map[(int)(player->pos.y + hitbox.x * sign)]
+		// 	[(int)player->pos.x] != '1')
 		player->pos.y += player->delta.x * sign;
-		if (map[(int)player->pos.y]
-			[(int)(player->pos.x + hitbox.y * -sign)] != '1')
+		// if (map[(int)player->pos.y]
+		// 	[(int)(player->pos.x + hitbox.y * -sign)] != '1')
 		player->pos.x += player->delta.y * -sign;
 	}
 }
