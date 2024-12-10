@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:32 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 22:24:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,10 @@
 // 	return(new_str);
 // }
 
-static int	len(char *str)
+void	free_2d(char **arr)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	while (arr)
+		free(*arr++);
 }
 
 char	*ft_strdup2(char *src)
@@ -51,7 +45,7 @@ char	*ft_strdup2(char *src)
 	int		i;
 	char	*dest;
 
-	dest = (char *)malloc(len(src) * sizeof(char) + 1);
+	dest = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
 	if (!(dest))
 	{
 		return (NULL);
@@ -66,34 +60,16 @@ char	*ft_strdup2(char *src)
 	return (dest);
 }
 
-static int	joinlen(char *s1, char *s2)
+void	exit_error(char *str)
 {
-	int	l;
-
-	l = len(s1) + len(s2);
-	return (l);
+	ft_putstr_fd(str, 2);
+	exit(1);
 }
 
-char	*joinstr(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*dest;
+// static int	joinlen(char *s1, char *s2)
+// {
+// 	int	l;
 
-	if (!(s1) || !(s2))
-		return (NULL);
-	dest = (char *)malloc((joinlen(s1, s2)) * (sizeof(char)) + 1);
-	if (!(dest))
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[j] != '\0')
-		dest[i++] = s1[j++];
-	// dest[i++] = '\n';
-	j = 0;
-	while (s2[j] != '\0')
-		dest[i++] = s2[j++];
-	dest[i] = '\0';
-	free(s1);
-	return (dest);
-}
+// 	l = ft_strlen(s1) + ft_strlen(s2);
+// 	return (l);
+// }

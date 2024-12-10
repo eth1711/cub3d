@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 23:02:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@ int	loop(void *param)
 {
 	t_data		*data;
 	t_ray		rays[RAYS];
+	static int	frames;
 
+	if (frames != 1250)
+	{
+		frames++;
+		return (0);
+	}
+	frames = 0;
 	data = (t_data *)param;
 	move_handler(&data->player, data->map.str);
 	look_handler(&data->player);
@@ -43,6 +50,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	data.map.str = parser(argv[1]);
+	exit(0);
 	init(&data);
 	mlx_loop(data.mlx);
 }

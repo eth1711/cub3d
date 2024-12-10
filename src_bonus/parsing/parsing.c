@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 23:24:52 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,11 @@ void	check_textures(int fd)
 char	*str_alloc(int fd)
 {
 	char	*str;
+	char	*str2;
 	char	*line;
 
 	str = NULL;
+	str2 = NULL;
 	line = get_next_line(fd);
 	while (line[0] == '\n')
 	{
@@ -121,8 +123,10 @@ char	*str_alloc(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		str = joinstr(str, line);
+		str2 = str;
+		str = ft_strjoin(str, line);
 		free(line);
+		free(str2);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -133,32 +137,44 @@ char	**parser(char *map)
 {
 	char *str;
 	char **str2;
-	// int		lw;
+	char **str3;
+	int	len;
 	int fd;
-	// int i;
-	// int j;
+	int i;
+	int j;
 
-	// i = 0;
-	// j = 0;
+	i = 0;
+	j = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		exit_error("Couldn't open map!\n");
 	check_textures(fd);
 	str = str_alloc(fd);
 	str2 = ft_split(str, '\n');
-	free(str);
-	return (str2);
-	// while(str2[i])
+	// check_map(str2);
+	// printf("str:%s\n", str);
+	printf("map:\n");
+	len = 0;
+	while (str2[len])
+		len++;
+	str3 = malloc(sizeof(char *) * len);
+	for (int i = 0; i < len; i++)
+		str3[i] = ft_strdup(str2[i]);
+	// for (int i = 0; str2[i]; i++)
 	// {
-	// 	j = 0;
-	// 	while(str2[i][j])
-	// 	{
-	// 		printf("%c", str2[i][j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	free(str2[i]);**
-	// 	i++;**
+	// 	printf("%s\n", str2[i]);
+	// 	free(str2[i]);
 	// }
-	// system("leaks cub3d");
+	// str3 = ft_split(str, '\n');
+	// printf("map:\n");
+	// for (int i = 0; str2[i]; i++)
+	// 	printf("%s\n", str2[i]);
+	for (int i = 0; str3[i]; i++)
+	{
+		printf("%s\n", str3[i]);
+		free(str3[i]);
+	}
+	free(str);
+	printf("map is valid!\n");
+	return (str3);
 }

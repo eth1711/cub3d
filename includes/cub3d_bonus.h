@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 16:05:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:34:18 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ char	*str_alloc(int fd);
 char	**parser(char *map);
 void	check_textures(int fd);
 void	exit_error(char *str);
+void	check_map(char **map);
 void	*ft_realloc(char **str, size_t old_size, size_t new_size);
 
 //Player

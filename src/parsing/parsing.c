@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/09 16:33:08 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:34:13 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	check_rgb(char *line)
 {
@@ -146,7 +146,15 @@ char	**parser(char *map)
 	check_textures(fd);
 	str = str_alloc(fd);
 	str2 = ft_split(str, '\n');
+	printf("map:\n");
+	for (int i = 0; str2[i]; i++)
+		printf("%s\n", str2[i]);
+	printf("\nend\n");
+	check_map(str2);
+	str2 = ft_split(str, '\n');
 	free(str);
+	printf("map is valid!\n");
+	exit(0);
 	return (str2);
 	// while(str2[i])
 	// {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:32 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/09 00:11:03 by etlim            ###   ########.fr       */
+/*   Updated: 2024/12/10 18:56:55 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 // void *ft_realloc(char **str, size_t old_size, size_t new_size)
 // {
@@ -34,16 +34,10 @@
 // 	return(new_str);
 // }
 
-static int	len(char *str)
+void	free_2d(char **arr)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	while (arr)
+		free(*arr++);
 }
 
 char	*ft_strdup2(char *src)
@@ -51,7 +45,7 @@ char	*ft_strdup2(char *src)
 	int		i;
 	char	*dest;
 
-	dest = (char *)malloc(len(src) * sizeof(char) + 1);
+	dest = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
 	if (!(dest))
 	{
 		return (NULL);
@@ -70,7 +64,7 @@ static int	joinlen(char *s1, char *s2)
 {
 	int	l;
 
-	l = len(s1) + len(s2);
+	l = ft_strlen(s1) + ft_strlen(s2);
 	return (l);
 }
 
