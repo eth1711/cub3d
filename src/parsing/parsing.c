@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/11/09 01:19:18 by etlim            ###   ########.fr       */
+/*   Updated: 2024/12/10 23:32:23 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,13 @@ int set_texture_rgb(char *line, char **checks, bool *textures, int count)
 				str = ft_strdup(line);
 				if (textures[cur_check] == 1)
 					return (-1);
-				if (cur_check < 4 && ((open(str, O_RDONLY)) > 0))
+				if ((cur_check < 4 && ((open(str, O_RDONLY)) > 0)) ||
+					((cur_check >= 4) && !check_rgb(line)))
 				{
 					textures[cur_check] = 1;
 					count++;
 					free(str);
 					return count;
-				}
-				else if((cur_check >= 4) && !check_rgb(line))
-				{
-					textures[cur_check] = 1;
-					count++;
-					free(str);
-					return (count);
 				}
 			}
 		}
@@ -108,9 +102,11 @@ void check_textures(int fd)
 char *str_alloc(int fd)
 {
 	char	*str;
+	char	*str2;
 	char	*line;
 	
 	str = NULL;
+	str2 = NULL;
 	line = get_next_line(fd);
 	while(line[0] == '\n')
 	{
@@ -122,8 +118,10 @@ char *str_alloc(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		str = joinstr(str, line);
+		str2 = str;
+		str = ft_strjoin(str, line);
 		free(line);
+		free(str2);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -148,7 +146,6 @@ char **parser(char *map)
 	str = str_alloc(fd);
 	str2 = ft_split(str, 12);
 	free(str);
-	return(str2);
 	// while(str2[i])
 	// {
 	// 	j = 0;
@@ -158,8 +155,8 @@ char **parser(char *map)
 	// 		j++;
 	// 	}
 	// 	printf("\n");
-	// 	free(str2[i]);**
-	// 	i++;**
+	// 	free(str2[i]);
+	// 	i++;
 	// }
-	// system("leaks cub3d");
+	return(str2);
 }
