@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:43:42 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,19 @@
 void	init_hooks(t_data *data)
 {
 	mlx_hook(data->window, ON_DESTROY, 0, on_destroy, NULL);
+	mlx_hook(
+		data->window, ON_MOUSE_MOVE, (1L << 6),
+		on_mouse_move, (void *)data);
 	mlx_hook(data->window, ON_KEY_DOWN, (1L), on_key_down, (void *)data);
 	mlx_key_hook(data->window, on_key_up, (void *)data);
 	mlx_loop_hook(data->mlx, loop, (void *)data);
+}
+
+void	init_mouse(t_data *data)
+{
+	mlx_mouse_hide(data->mlx, data->window);
+	mlx_mouse_move(data->mlx, data->window,
+		WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
 void	init_map(t_map *map)
@@ -61,8 +71,9 @@ void	init_mlx(t_data *data)
 void	init(t_data *data)
 {
 	init_map(&data->map);
-	init_mlx(data);
-	init_textures(data);
-	init_hooks(data);
 	init_player(&data->player, &data->map);
+	init_mlx(data);
+	init_hooks(data);
+	init_mouse(data);
+	init_textures(data);
 }

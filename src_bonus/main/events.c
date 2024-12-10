@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 16:08:21 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:55:32 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,24 @@ int	on_key_up(int key, void *param)
 		data->player.l_left = false;
 	else if (key == KEY_RIGHT)
 		data->player.l_right = false;
+	return (0);
+}
+
+int	on_mouse_move(int x, int y, void *param)
+{
+	static int	prev_x = WIN_HEIGHT / 2;
+	t_data		*data;
+
+	(void)y;
+	data = (t_data *)param;
+	if (prev_x < x)
+		data->player.angle += 0.01;
+	else if (prev_x > x)
+		data->player.angle -= 0.01;
+	else
+		return (0);
+	data->player.angle = reset_angle(data->player.angle);
+	prev_x = x;
+	mlx_mouse_move(data->mlx, data->window, WIN_HEIGHT / 2, WIN_WIDTH / 2);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:17 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:05:35 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ enum
 {
 	ON_DESTROY = 17,
 	ON_KEY_DOWN = 2,
+	ON_MOUSE_MOVE = 6,
 	KEY_ESC = 53,
 	KEY_W = 13,
 	KEY_A = 0,
@@ -64,6 +65,7 @@ enum
 enum
 {
 	ON_DESTROY = 17,
+	ON_MOUSE_MOVE = 6,
 	ON_KEY_DOWN = 2,
 	KEY_ESC = XK_Escape,
 	KEY_W = XK_w,
@@ -229,6 +231,7 @@ void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray,
 int		on_destroy(void *param);
 int		on_key_down(int key, void *param);
 int		on_key_up(int key, void *param);
+int		on_mouse_move(int x, int y, void *param);
 
 //Utils----------------------------------------------------
 
