@@ -6,11 +6,11 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:01:34 by amaligno          #+#    #+#             */
-/*   Updated: 2024/11/04 21:54:44 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 double	calc_hyp(t_vectord side1, t_vectord side2)
 {

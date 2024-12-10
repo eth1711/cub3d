@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 20:44:13 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:32:27 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,6 @@ void	draw_player(t_image *image, t_player player, int wall_size)
 		player.pos.y - player.size / 2},
 		create_trgb(0, 255, 223, 18)
 	});
-}
-
-void	draw_map(t_image *image, t_map	map)
-{
-	int		x;
-	int		y;
-	t_rect	wall;
-
-	y = 0;
-	wall.size = (t_vectord){map.wall_size - 1, map.wall_size - 1};
-	while (map.str[y])
-	{
-		x = 0;
-		while (map.str[y][x] && map.str[y][x])
-		{
-			if (map.str[y][x] == '1')
-				wall.color = create_trgb(0, 0, 0, 0);
-			else if (map.str[y][x] == '0')
-				wall.color = create_trgb(0, 255, 255, 255);
-			wall.pos.x = x * map.wall_size;
-			wall.pos.y = y * map.wall_size;
-			draw_rectangle(image, wall);
-			x++;
-		}
-		y++;
-	}
 }
 
 void	draw_rays_2d(t_image *image, t_ray *rays, int map_size)

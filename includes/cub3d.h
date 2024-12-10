@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 20:47:02 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:44:27 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,14 +209,13 @@ void	exit_error(char *str);
 void	*ft_realloc(char **str, size_t old_size, size_t new_size);
 
 //Player
-void	move_handler(t_player *player, char **map);
+void	move_handler(t_player *player);
 void	look_handler(t_player *player);
 int		check_move(t_player *player, t_map map);
 
 //Rendering
 void	draw_player(t_image *image, t_player player, int wall_size);
 void	draw_background(t_image *image, t_textures textures);
-void	draw_map(t_image *image, t_map map);
 void	draw_rays_2d(t_image *image, t_ray *rays, int map_size);
 void	draw_rays_3d(t_image *image, t_ray *rays,
 			t_player player, t_textures textures);
