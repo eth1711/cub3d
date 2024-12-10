@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
 
 ifeq ($(shell uname), Linux)
 	MLX = lib/minilibx-linux
@@ -30,15 +30,9 @@ all : $(NAME)
 	@echo $(NAME) Done !
 
 $(NAME) : $(OBJ)
-	@make -C $(MLX)
-	@make -C lib/Libft
-	@make -C lib/gnl
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) $(LINKER)
 
 $(NAME_BONUS) : $(OBJ_BONUS)
-	make -C $(MLX)
-	make -C lib/Libft
-	make -C lib/gnl
 	$(CC) $(FLAGS) $(OBJ_BONUS) -o $(NAME_BONUS) $(LINKER)
 
 %.o : %.c
@@ -46,20 +40,36 @@ $(NAME_BONUS) : $(OBJ_BONUS)
 	$(CC) $(FLAGS) $(INCLUDES) -c -o $@ $< 
 
 bonus : $(NAME_BONUS)
-	echo $(NAME_BONUS) Done !
+	@echo $(NAME_BONUS) Done !
 
 clean :
 	@rm -rf $(OBJ)
 	@rm -rf $(OBJ_BONUS)
-	@make clean -C ./lib/Libft
-	@make clean -C ./lib/gnl
 
 fclean : clean
 	@rm -rf $(NAME)
 	@rm -rf $(NAME_BONUS)
-	@make fclean -C ./lib/gnl
-	@make clean -C ./lib/Libft
 
 re : fclean all
 
-.PHONY : all clean fclean re
+lib	:
+	@make -C $(MLX)
+	@make -C lib/Libft
+	@make -C lib/gnl
+
+lclean:
+	@make clean -C $(MLX)
+	@make clean -C lib/Libft
+	@make clean -C lib/gnl
+
+lfclean :
+	@make fclean -C $(MLX)
+	@make fclean -C lib/Libft
+	@make fclean -C lib/gnl
+
+lre :
+	@make re -C $(MLX)
+	@make re -C lib/Libft
+	@make re -C lib/gnl
+
+.PHONY : all clean fclean re lib lclean lfclean
