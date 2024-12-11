@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:46:23 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/11 18:11:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:44:30 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@ int	count_spaces(char **map, t_vectori *start)
 	int	spaces;
 
 	y = 0;
-	x = 0;
 	spaces = 0;
 	while (map[y])
 	{
 		x = 0;
 		while (map[y][x])
 		{
-			if (!ft_strchr("1 ", map[y][x]))
+			if (!ft_strchr("NWSE0", map[y][x]))
 				spaces++;
-			if (ft_strchr("NSWE", map[y][x]))
+			else if (ft_strchr("NSWE", map[y][x]))
 			{
 				start->x = x;
 				start->y = y;
 			}
+			else if (!ft_strchr("1F ", map[y][x]))
+				exit_error("Error\nInvalid char");
 			x++;
 		}
 		y++;
@@ -40,13 +41,10 @@ int	count_spaces(char **map, t_vectori *start)
 	return (spaces);
 }
 
-void	check_char(char **map, char c, t_vectori pos, int *count)
+void	check_char(char **map, t_vectori pos, int *count)
 {
-	if (c && !ft_strchr("1F ", c))
-	{
-		map[pos.y][pos.x] = 'F';
-		(*count)++;
-	}
+	map[pos.y][pos.x] = 'F';
+	(*count)++;
 	if (!pos.y || !pos.x || !map[pos.y + 1] || !map[pos.y][pos.x + 1]
 		|| ft_strlen(map[pos.y + 1]) <= (size_t)pos.x
 		|| ft_strlen(map[pos.y - 1]) <= (size_t)pos.x)
@@ -60,7 +58,7 @@ void	floodfill(char **map, t_vectori pos, int *count)
 	char	c;
 
 	c = map[pos.y][pos.x];
-	check_char(map, c, pos, count);
+	check_char(map, pos, count);
 	if (pos.x && c && !ft_strchr("1F", map[pos.y][pos.x - 1]))
 		floodfill(map, (t_vectori){pos.x - 1, pos.y}, count);
 	if (map[pos.y][pos.x + 1] && c && !ft_strchr("1F", map[pos.y][pos.x + 1]))

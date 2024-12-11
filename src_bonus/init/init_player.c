@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:30 by pringles          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:24:20 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	init_player(t_player *player, t_map *map)
 
 	c = 0;
 	set_pos(player, map, &c);
+	player->pos.x += 0.5;
+	player->pos.y += 0.5;
 	set_angle(player, c);
 	player->size = map->wall_size / 2;
 	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,
