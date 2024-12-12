@@ -6,82 +6,51 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:46:23 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/11 18:44:30 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:51:43 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	count_spaces(char **map, t_vectori *start)
+void	check_char(char **map, int x, int y, bool *start)
 {
-	int	x;
-	int	y;
-	int	spaces;
+	if (!y || !x
+		|| ft_strchr(" ", map[y][x - 1])
+		|| ft_strchr(" ", map[y][x + 1])
+		|| ft_strlen(map[y + 1]) <= (size_t)x
+		|| ft_strlen(map[y - 1]) <= (size_t)x)
+	{
+		exit_error("Map not closed\n");
+	}
+	if (ft_strchr("NSWE", map[y][x]))
+	{
+		if (*start)
+			exit_error("Duplicate start position\n");
+		*start = true;
+	}
+}
+
+void	check_map(char **map)
+{
+	int		x;
+	int		y;
+	bool	start;
 
 	y = 0;
-	spaces = 0;
+	start = false;
 	while (map[y])
 	{
 		x = 0;
 		while (map[y][x])
 		{
-			if (!ft_strchr("NWSE0", map[y][x]))
-				spaces++;
-			else if (ft_strchr("NSWE", map[y][x]))
-			{
-				start->x = x;
-				start->y = y;
-			}
+			if (ft_strchr("NWSE0", map[y][x]))
+				check_char(map, x, y, &start);
 			else if (!ft_strchr("1F ", map[y][x]))
-				exit_error("Error\nInvalid char");
+				exit_error("Invalid char\n");
 			x++;
 		}
 		y++;
 	}
-	return (spaces);
-}
-
-void	check_char(char **map, t_vectori pos, int *count)
-{
-	map[pos.y][pos.x] = 'F';
-	(*count)++;
-	if (!pos.y || !pos.x || !map[pos.y + 1] || !map[pos.y][pos.x + 1]
-		|| ft_strlen(map[pos.y + 1]) <= (size_t)pos.x
-		|| ft_strlen(map[pos.y - 1]) <= (size_t)pos.x)
-	{
-		exit_error("Error\nMap not closed\n");
-	}
-}
-
-void	floodfill(char **map, t_vectori pos, int *count)
-{
-	char	c;
-
-	c = map[pos.y][pos.x];
-	check_char(map, pos, count);
-	if (pos.x && c && !ft_strchr("1F", map[pos.y][pos.x - 1]))
-		floodfill(map, (t_vectori){pos.x - 1, pos.y}, count);
-	if (map[pos.y][pos.x + 1] && c && !ft_strchr("1F", map[pos.y][pos.x + 1]))
-		floodfill(map, (t_vectori){pos.x + 1, pos.y}, count);
-	if (pos.y && c && !ft_strchr("1F", map[pos.y - 1][pos.x]))
-		floodfill(map, (t_vectori){pos.x, pos.y - 1}, count);
-	if (map[pos.y + 1] && c && !ft_strchr("1F", map[pos.y + 1][pos.x]))
-		floodfill(map, (t_vectori){pos.x, pos.y + 1}, count);
-}
-
-void	check_map(char **map)
-{
-	t_vectori	start;
-	int			spaces;
-	int			count;
-
-	start.x = -1;
-	start.y = -1;
-	count = 0;
-	spaces = count_spaces(map, &start);
-	if (start.x < 0 && start.y < 0)
-		exit_error("Error\nMissing Player start");
-	floodfill(map, start, &count);
-	if (count != spaces)
-		exit_error("Error\nInvalid map\n");
+	if (!start)
+		exit_error("Missing player start\n");
 }

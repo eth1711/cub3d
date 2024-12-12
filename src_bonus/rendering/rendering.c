@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:45:47 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,18 @@ void	draw_map(t_image *image, t_map	map)
 	wall.size = (t_vectord){map.wall_size - 1, map.wall_size - 1};
 	while (map.str[y])
 	{
-		x = 0;
-		while (map.str[y][x] && map.str[y][x])
+		x = -1;
+		while (map.str[y][++x] && map.str[y][x])
 		{
+			if (map.str[y][x] == ' ')
+				continue ;
 			if (map.str[y][x] == '1')
 				wall.color = create_trgb(0, 0, 0, 0);
-			else if (map.str[y][x] == '0')
+			else if (ft_strchr("NWSE0", map.str[y][x]))
 				wall.color = create_trgb(0, 255, 255, 255);
 			wall.pos.x = x * map.wall_size;
 			wall.pos.y = y * map.wall_size;
 			draw_rectangle(image, wall);
-			x++;
 		}
 		y++;
 	}
