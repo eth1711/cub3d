@@ -6,7 +6,7 @@
 /*   By: etlim <etlim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 22:37:54 by etlim            ###   ########.fr       */
+/*   Updated: 2024/12/12 17:26:41 by etlim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,21 @@ enum {
 enum parsing{
 	NO,
 	SO,
-	EA,
 	WE,
+	EA,
 	F,
 	C
 };
+
+typedef struct s_parsing
+{
+	char *line;
+	char **checks;
+	bool *textures;
+	int cur_check;
+	int count;
+	char *tmp;
+} t_parsing;
 
 typedef struct s_vectori
 {
@@ -140,25 +150,15 @@ typedef struct s_player
 	bool		use;
 }	t_player;
 
-// typedef struct s_textures
-// {
-// 	void	*north;
-// 	void	*south;
-// 	void	*east;
-// 	void	*west;
-// 	int		*floor;
-// 	int		*ceiling;
-// }	t_textures;
-
-typedef struct s_parsing
+typedef struct s_textures
 {
-	bool	no;
-	bool	so;	
-	bool	we;
-	bool	ea;	
-	bool	f;
-	bool	c;
-}	t_parsing;
+	void	*north;
+	void	*south;
+	void	*east;
+	void	*west;
+	int		floor;
+	int		ceiling;
+}	t_textures;
 
 typedef struct s_data
 {
@@ -168,6 +168,7 @@ typedef struct s_data
 	t_image		image;
 	t_map		map;
 	t_player	player;
+	t_textures	textures;
 }	t_data;
 
 //Main-----------------------------------------------------
@@ -179,13 +180,15 @@ int		loop(void *param);
 void	init(t_data *data);
 
 //Parsing
-int		check_rgb(char *line);
-int		set_texture_rgb(char *line, char **checks, bool *textures, int count);
-char	*joinstr(char *s1, char *s2);
+int		check_rgb(t_parsing *parse, t_textures *nsewfc);
+int		check_texture_rgb(t_parsing *parse, t_textures *nsewfc);
+int		check_texture_rgb2(t_parsing *parse, t_textures *nsewfc);
+void	get_rgb(char* line, int *r, int *g, int *b);
+void	set_texture_rgb(t_parsing *parse, t_textures *nsewfc);
 char	*ft_strdup2(char *src);
 char	*str_alloc(int fd);
-char	**parser(char *map);
-void	check_textures(int fd);
+char	**parser(char *map, t_textures *nsewfc);
+void	str_check(int fd, t_textures *nsewfc);
 void	exit_error(char *str);
 void	*ft_realloc(char **str, size_t old_size, size_t new_size);
 
