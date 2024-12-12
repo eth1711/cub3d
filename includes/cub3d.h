@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/12 18:33:37 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:27:34 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,21 @@ enum e_parsing
 {
 	NO,
 	SO,
-	EA,
 	WE,
+	EA,
 	F,
 	C
 };
+
+typedef struct s_parsing
+{
+	char	*line;
+	char	**checks;
+	bool	*textures;
+	int		cur_check;
+	int		count;
+	char	*tmp;
+}	t_parsing;
 
 typedef struct s_vectori
 {
@@ -153,10 +163,10 @@ typedef struct s_player
 
 typedef struct s_textures
 {
-	t_image	north;
-	t_image	south;
-	t_image	east;
-	t_image	west;
+	void	*north;
+	void	*south;
+	void	*east;
+	void	*west;
 	int		floor;
 	int		ceiling;
 }	t_textures;
@@ -180,6 +190,7 @@ typedef struct s_data
 	t_image		image;
 	t_map		map;
 	t_player	player;
+	t_textures	textures;
 }	t_data;
 
 void	set_mlx_image(t_image *image);
@@ -198,9 +209,11 @@ void	init_textures(t_data *data);
 int		loop(void *param);
 
 //Parsing
-int		check_rgb(char *line);
-int		set_texture_rgb(char *line, char **checks, bool *textures, int count);
-char	*joinstr(char *s1, char *s2);
+int		check_rgb(t_parsing *parse, t_textures *nsewfc);
+int		check_texture_rgb(t_parsing *parse, t_textures *nsewfc);
+int		check_texture_rgb2(t_parsing *parse, t_textures *nsewfc);
+void	get_rgb(char* line, int *r, int *g, int *b);
+void	set_texture_rgb(t_parsing *parse, t_textures *nsewfc);
 char	*ft_strdup2(char *src);
 char	*str_alloc(int fd);
 char	**parser(char *map);
