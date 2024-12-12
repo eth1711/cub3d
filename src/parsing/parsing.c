@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/09 16:33:08 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:17:42 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,32 +133,19 @@ char	**parser(char *map)
 {
 	char *str;
 	char **str2;
-	// int		lw;
 	int fd;
-	// int i;
-	// int j;
 
-	// i = 0;
-	// j = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		exit_error("Couldn't open map!\n");
 	check_textures(fd);
 	str = str_alloc(fd);
 	str2 = ft_split(str, '\n');
+	check_map(str2);
+	for (int i = 0; str2[i]; i++)
+		free(str2[i]);
+	free(str2);
+	str2 = ft_split(str, '\n');
 	free(str);
 	return (str2);
-	// while(str2[i])
-	// {
-	// 	j = 0;
-	// 	while(str2[i][j])
-	// 	{
-	// 		printf("%c", str2[i][j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	free(str2[i]);**
-	// 	i++;**
-	// }
-	// system("leaks cub3d");
 }

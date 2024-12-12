@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/11 17:16:31 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:33:37 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define DOF 20
 # define FOV 60
-# define RAYS 640
+# define RAYS 60
 
 # ifdef __APPLE__
 
@@ -205,6 +205,7 @@ char	*ft_strdup2(char *src);
 char	*str_alloc(int fd);
 char	**parser(char *map);
 void	check_textures(int fd);
+void	check_map(char **map);
 void	exit_error(char *str);
 void	*ft_realloc(char **str, size_t old_size, size_t new_size);
 
