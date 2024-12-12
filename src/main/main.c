@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/12 19:33:11 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 00:11:48 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ int	loop(void *param)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_paths	paths;
 
 	if (argc != 2)
 	{
 		ft_putstr_fd("Incorrect argument amount\n", STDERR_FILENO);
 		return (1);
 	}
-	data.map.str = parser(argv[1]);
-	init(&data);
+	if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+	{
+		ft_putstr_fd("Not a .cub file\n", STDERR_FILENO);
+		return (1);
+	}
+	data.map.str = parser(argv[1], &paths);
+	init(&data, paths);
 	mlx_loop(data.mlx);
 }

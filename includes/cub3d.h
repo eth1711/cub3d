@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/12 19:27:34 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 00:19:03 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define DOF 20
 # define FOV 60
-# define RAYS 60
+# define RAYS 64
 
 # ifdef __APPLE__
 
@@ -161,25 +161,25 @@ typedef struct s_player
 	bool		use;
 }	t_player;
 
+typedef struct s_paths
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor;
+	int		ceiling;
+}	t_paths;
+
 typedef struct s_textures
 {
-	void	*north;
-	void	*south;
-	void	*east;
-	void	*west;
+	t_image	north;
+	t_image	south;
+	t_image	east;
+	t_image	west;
 	int		floor;
 	int		ceiling;
 }	t_textures;
-
-typedef struct s_parsing
-{
-	bool	no;
-	bool	so;	
-	bool	we;
-	bool	ea;	
-	bool	f;
-	bool	c;
-}	t_parsing;
 
 typedef struct s_data
 {
@@ -190,7 +190,6 @@ typedef struct s_data
 	t_image		image;
 	t_map		map;
 	t_player	player;
-	t_textures	textures;
 }	t_data;
 
 void	set_mlx_image(t_image *image);
@@ -199,9 +198,9 @@ void	set_mlx_image(t_image *image);
 void	cast_rays(t_player player, t_map map, t_ray *rays);
 
 //Init
-void	init(t_data *data);
+void	init(t_data *data, t_paths paths);
 void	init_player(t_player *player, t_map *map);
-void	init_textures(t_data *data);
+void	init_textures(t_data *data, t_paths paths);
 
 //Main-----------------------------------------------------
 
@@ -209,14 +208,13 @@ void	init_textures(t_data *data);
 int		loop(void *param);
 
 //Parsing
-int		check_rgb(t_parsing *parse, t_textures *nsewfc);
-int		check_texture_rgb(t_parsing *parse, t_textures *nsewfc);
-int		check_texture_rgb2(t_parsing *parse, t_textures *nsewfc);
-void	get_rgb(char* line, int *r, int *g, int *b);
-void	set_texture_rgb(t_parsing *parse, t_textures *nsewfc);
+int		check_rgb(t_parsing *parse, t_paths *nsewfc);
+int		check_texture_rgb(t_parsing *parse, t_paths *nsewfc);
+int		check_texture_rgb2(t_parsing *parse, t_paths *nsewfc);
+void	get_rgb(char *line, int *r, int *g, int *b);
+// void	set_texture_rgb(t_parsing *parse, t_paths *nsewfc);
 char	*ft_strdup2(char *src);
-char	*str_alloc(int fd);
-char	**parser(char *map);
+char	**parser(char *map, t_paths *nsewfc);
 void	check_textures(int fd);
 void	check_map(char **map);
 void	exit_error(char *str);

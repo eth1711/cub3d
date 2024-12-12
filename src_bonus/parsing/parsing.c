@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/12 19:22:03 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:33:51 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ char	*str_alloc(int fd)
 	close(fd);
 	return (str);
 }
+
+void	check_map(char **str);
 
 char	**parser(char *map)
 {

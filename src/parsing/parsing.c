@@ -6,30 +6,18 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/12 19:31:54 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 00:22:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	len(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
 
 char	*ft_strdup2(char *src)
 {
 	int		i;
 	char	*dest;
 
-	dest = (char *)malloc(len(src) * sizeof(char) + 1);
+	dest = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
 	if (!(dest))
 	{
 		return (NULL);
@@ -44,41 +32,42 @@ char	*ft_strdup2(char *src)
 	return (dest);
 }
 
-void str_check(int fd, t_textures *nsewfc)
+int	is_empty_str(char *str)
 {
-	t_parsing parse;
-	
+	while (*str && ft_strchr("\t\n ", *str))
+		str++;
+	if (*str)
+		return (0);
+	return (1);
+}
+
+char	*str_check(int fd, t_paths *nsewfc)
+{
+	t_parsing	parse;
+
 	parse.textures = (bool[6]){0, 0, 0, 0, 0, 0};
-	parse.checks = (char*[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
+	parse.checks = (char *[6]){"NO", "SO", "WE", "EA", "F", "C"};
 	parse.count = 0;
 	parse.line = get_next_line(fd);
-	while (parse.line != NULL)
+	while (parse.line != NULL && parse.count < 6)
 	{
-		parse.count = check_texture_rgb(&parse, nsewfc);
-		if (parse.count == 6)
-		{
-			parse.cur_check = -1;
-			while (++parse.cur_check < 6)
-				if (!parse.textures[parse.cur_check])
-					exit_error("Error: Missing texture or RGB config!");
-			free(parse.line);
-			return ;
-		}
-		printf("line: %s\n", parse.line);
+		if (!is_empty_str(parse.line))
+			parse.count = check_texture_rgb(&parse, nsewfc);
 		free(parse.line);
 		parse.line = get_next_line(fd);
 	}
+	if (parse.count != 6)
+		exit_error("Missing texture or RGB config!");
+	return (parse.line);
 }
 
-char *str_alloc(int fd)
+char	*str_alloc(int fd, char *line)
 {
 	char	*str;
 	char	*str2;
-	char	*line;
 
 	str = NULL;
 	str2 = NULL;
-	line = get_next_line(fd);
 	while (line[0] == '\n')
 	{
 		free(line);
@@ -89,6 +78,8 @@ char *str_alloc(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (is_empty_str(line))
+			exit_error("Map contains empty line\n");
 		str2 = str;
 		str = ft_strjoin(str, line);
 		free(line);
@@ -99,27 +90,27 @@ char *str_alloc(int fd)
 	return (str);
 }
 
-char **parser(char *map, t_textures *nsewfc)
+char	**parser(char *map, t_paths *nsewfc)
 {
-	char *str;
-	char **str2;
-	int fd;
+	char	*str;
+	char	**str2;
+	int		i;
+	int		fd;
 
+	i = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		exit_error("Couldn't open map!\n");
-	str_check(fd, nsewfc);
-	str = str_alloc(fd);
+	str = str_alloc(fd, str_check(fd, nsewfc));
+	str2 = ft_split(str, '\n');
+	printf("map: \n");
+	for (int i = 0; str2[i]; i++)
+		printf("%s\n", str2[i]);
+	check_map(str2);
+	while (str2[i])
+		free(str2[i++]);
+	free(str2);
 	str2 = ft_split(str, '\n');
 	free(str);
-	
-	while(str2[i])
-	{
-		printf("%s", str2[i]);
-		printf("\n");
-		free(str2[i]);
-		i++;
-	}
-	free(str2);
-	return(str2);
+	return (str2);
 }

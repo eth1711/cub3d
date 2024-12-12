@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:30 by pringles          #+#    #+#             */
-/*   Updated: 2024/12/12 16:18:56 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:33:06 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_angle(t_player *player, char c)
 
 void	set_pos(t_player *player, t_map *map, char *c)
 {
+	player->pos.y = 0;
 	while (map->str[(int)(player->pos.y)])
 	{
 		player->pos.x = 0;

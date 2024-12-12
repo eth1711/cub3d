@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:30 by pringles          #+#    #+#             */
-/*   Updated: 2024/12/11 18:24:20 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:36:45 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	set_pos(t_player *player, t_map *map, char *c)
 		}
 		if (*c && ft_strchr("NSWE", *c))
 		{
-			map->str[(int)player->pos.y][(int)player->pos.y] = '0';
+			// map->str[(int)player->pos.y][(int)player->pos.y] = '0';
 			break ;
 		}
 		player->pos.y += 1;
