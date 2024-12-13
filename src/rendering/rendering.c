@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:24 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:32:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:34:21 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	draw_rays_3d(t_image *image, t_ray *rays,
 		len = (rays[i].len * cos(angle));
 		line.size.y = (WIN_HEIGHT) / len;
 		line.pos.y = (WIN_HEIGHT - line.size.y) / 2;
-		line.pos.x += line.size.x;
 		if (rays[i].vert)
 			line.color = create_trgb(0, 136, 3, 252);
 		else
 			line.color = create_trgb(0, 106, 0, 199);
 		draw_textured_ray(image, line, rays[i], textures);
+		line.pos.x += line.size.x;
 		i++;
 	}
 }

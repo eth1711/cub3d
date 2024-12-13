@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 14:20:46 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:35:12 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define DOF 20
 # define FOV 60
-# define RAYS 2
+# define RAYS 1920
 
 # ifdef __APPLE__
 
@@ -98,7 +98,6 @@ typedef struct s_parsing
 	int		count;
 	char	*tmp;
 }	t_parsing;
-
 
 typedef struct s_vectori
 {

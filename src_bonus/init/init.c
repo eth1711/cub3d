@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:55:11 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 14:16:26 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:30:14 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	init_map(t_map *map)
 void	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->window = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d_bonus");
+	data->window = mlx_new_window(
+			data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d_bonus");
 	data->image.image = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->image.addr = mlx_get_data_addr(
 			data->image.image,
