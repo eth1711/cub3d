@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:30 by pringles          #+#    #+#             */
-/*   Updated: 2024/12/12 23:36:45 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:16:26 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_angle(t_player *player, char c)
 
 void	set_pos(t_player *player, t_map *map, char *c)
 {
+	player->pos.y = 0;
 	while (map->str[(int)(player->pos.y)])
 	{
 		player->pos.x = 0;
@@ -37,7 +38,9 @@ void	set_pos(t_player *player, t_map *map, char *c)
 		}
 		if (*c && ft_strchr("NSWE", *c))
 		{
-			// map->str[(int)player->pos.y][(int)player->pos.y] = '0';
+			map->str[(int)player->pos.y][(int)player->pos.y] = '0';
+			player->pos.x += 0.5;
+			player->pos.y += 0.5;
 			break ;
 		}
 		player->pos.y += 1;
@@ -50,8 +53,6 @@ void	init_player(t_player *player, t_map *map)
 
 	c = 0;
 	set_pos(player, map, &c);
-	player->pos.x += 0.5;
-	player->pos.y += 0.5;
 	set_angle(player, c);
 	player->size = map->wall_size / 2;
 	player->delta = (t_vectord){cos(player->angle) * PLAYER_SPEED,

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:13:00 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/12 23:37:27 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:20:10 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	loop(void *param)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_paths	paths;
 
 	(void)(argv);
 	if (argc != 2)
@@ -43,17 +44,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Incorrect argument amount\n", STDERR_FILENO);
 		return (1);
 	}
-	// data.map.str = parser(argv[1]);
-	data.map.str =  (char *[]){
-		"111111111111",
-		"1S000000001",
-		"10000000001",
-		"100011100001",
-		"1000011011001",
-		"10000000001",
-		"111111111111",
-		NULL
-	};
-	init(&data);
+	data.map.str = parser(argv[1], &paths);
+	init(&data, paths);
 	mlx_loop(data.mlx);
 }

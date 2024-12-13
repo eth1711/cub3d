@@ -6,111 +6,68 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/12 23:33:51 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:16:26 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	check_rgb(char *line)
+char	*ft_strdup2(char *src)
 {
-	int	r;
-	int	g;
-	int	b;
-	int	cur;
-	int	*values;
+	int		i;
+	char	*dest;
 
-	values = (int [3]){-1, -1, -1};
-	cur = 0;
-	while (*line && cur < 3)
+	dest = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (!(dest))
 	{
-		values[cur++] = ft_atoi(line);
-		while (*line && *line != ',')
-			line++;
-		if (*line == ',')
-			line++;
+		return (NULL);
 	}
-	r = values[0];
-	g = values[1];
-	b = values[2];
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (-1);
-	return (0);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
-int	set_texture_rgb(char *line, char **checks, bool *textures, int count)
+int	is_empty_str(char *str)
 {
-	int		cur_check;
-	char	*str;
-
-	str = NULL;
-	cur_check = 0;
-	while (cur_check < 6)
-	{
-		if (!ft_strncmp(line, checks[cur_check], ft_strlen(checks[cur_check])))
-		{
-			line = line + ft_strlen(checks[cur_check]);
-			if (!textures[cur_check])
-			{
-				str = ft_strdup(line);
-				if (textures[cur_check] == 1)
-					return (-1);
-				if (cur_check < 4 && ((open(str, O_RDONLY)) > 0))
-				{
-					textures[cur_check] = 1;
-					count++;
-					free(str);
-					return (count);
-				}
-				else if ((cur_check >= 4) && !check_rgb(line))
-				{
-					textures[cur_check] = 1;
-					count++;
-					free(str);
-					return (count);
-				}
-			}
-		}
-		cur_check++;
-	}
-	free(str);
-	return (-1);
+	while (*str && ft_strchr("\t\n ", *str))
+		str++;
+	if (*str)
+		return (0);
+	return (1);
 }
 
-void	check_textures(int fd)
+char	*str_check(int fd, t_paths *nsewfc)
 {
-	int		count;
-	int		cur_check;
-	bool	*textures;
-	char	*line;
-	char	**checks;
+	t_parsing	parse;
 
-	textures = (bool[6]){0, 0, 0, 0, 0, 0};
-	checks = (char *[6]){"NO ", "SO ", "WE ", "EA ", "F ", "C "};
-	count = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	parse.textures = (bool[6]){0, 0, 0, 0, 0, 0};
+	parse.checks = (char *[6]){"NO", "SO", "WE", "EA", "F", "C"};
+	parse.count = 0;
+	parse.line = get_next_line(fd);
+	while (parse.line != NULL && parse.count < 6)
 	{
-		count = set_texture_rgb(line, checks, textures, count);
-		if (count == 6)
-		{
-			cur_check = -1;
-			while (++cur_check < 6)
-				if (!textures[cur_check])
-					exit_error("Error: Missing texture or RGB config!");
-			free(line);
-			return ;
-		}
-		free(line);
+		if (!is_empty_str(parse.line))
+			parse.count = check_texture_rgb(&parse, nsewfc);
+		free(parse.line);
+		parse.line = get_next_line(fd);
 	}
+	if (parse.count != 6)
+		exit_error("Missing texture or RGB config!");
+	return (parse.line);
 }
 
-char	*str_alloc(int fd)
+char	*str_alloc(int fd, char *line)
 {
 	char	*str;
-	char	*line;
+	char	*str2;
 
 	str = NULL;
-	line = get_next_line(fd);
+	str2 = NULL;
 	while (line[0] == '\n')
 	{
 		free(line);
@@ -121,31 +78,34 @@ char	*str_alloc(int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		str = joinstr(str, line);
+		if (is_empty_str(line))
+			exit_error("Map contains empty line\n");
+		str2 = str;
+		str = ft_strjoin(str, line);
 		free(line);
+		free(str2);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (str);
 }
 
-void	check_map(char **str);
-
-char	**parser(char *map)
+char	**parser(char *map, t_paths *nsewfc)
 {
-	char *str;
-	char **str2;
-	int fd;
+	char	*str;
+	char	**str2;
+	int		i;
+	int		fd;
 
+	i = 0;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		exit_error("Couldn't open map!\n");
-	check_textures(fd);
-	str = str_alloc(fd);
+	str = str_alloc(fd, str_check(fd, nsewfc));
 	str2 = ft_split(str, '\n');
 	check_map(str2);
-	for (int i = 0; str2[i]; i++)
-		free(str2[i]);
+	while (str2[i])
+		free(str2[i++]);
 	free(str2);
 	str2 = ft_split(str, '\n');
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:23:22 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/10 15:35:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:16:26 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ void	set_image_struct(void *mlx, t_image *image, char *path)
 {
 	image->image = mlx_xpm_file_to_image(
 			mlx, path, &image->width, &image->height);
+	if (!image->image)
+		exit_error("Xpm file error\n");
 	set_mlx_image(image);
 }
 
-void	init_textures(t_data *data)
+void	init_textures(t_data *data, t_paths paths)
 {
-	set_image_struct(data->mlx, &data->textures.north, "textures/mario.xpm");
-	set_image_struct(data->mlx, &data->textures.east, "textures/cat_32.xpm");
-	set_image_struct(data->mlx, &data->textures.south, "textures/funny.xpm");
-	set_image_struct(data->mlx, &data->textures.west, "textures/funny_me.xpm");
-	data->textures.ceiling = create_trgb(0, 194, 12, 240);
-	data->textures.floor = 0;
+	set_image_struct(data->mlx, &data->textures.north, paths.north);
+	set_image_struct(data->mlx, &data->textures.east, paths.east);
+	set_image_struct(data->mlx, &data->textures.south, paths.south);
+	set_image_struct(data->mlx, &data->textures.west, paths.west);
+	data->textures.ceiling = paths.ceiling;
+	data->textures.floor = paths.floor;
 }

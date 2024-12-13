@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 00:19:03 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:19:20 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,6 @@ int		check_rgb(t_parsing *parse, t_paths *nsewfc);
 int		check_texture_rgb(t_parsing *parse, t_paths *nsewfc);
 int		check_texture_rgb2(t_parsing *parse, t_paths *nsewfc);
 void	get_rgb(char *line, int *r, int *g, int *b);
-// void	set_texture_rgb(t_parsing *parse, t_paths *nsewfc);
 char	*ft_strdup2(char *src);
 char	**parser(char *map, t_paths *nsewfc);
 void	check_textures(int fd);
