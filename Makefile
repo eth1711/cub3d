@@ -26,7 +26,7 @@ NAME = cub3d
 
 NAME_BONUS = cub3d_bonus
 
-all : $(NAME)
+all : $(NAME) lib
 	@echo $(NAME) Done !
 
 $(NAME) : $(OBJ)
@@ -58,14 +58,14 @@ lib	:
 	@make -C lib/gnl
 
 lclean:
-	@make clean -C $(MLX)
 	@make clean -C lib/Libft
 	@make clean -C lib/gnl
+	@make clean -C $(MLX)
 
 lfclean :
-	@make fclean -C $(MLX)
 	@make fclean -C lib/Libft
 	@make fclean -C lib/gnl
+	@make clean -C $(MLX)
 
 lre :
 	@make re -C $(MLX)
