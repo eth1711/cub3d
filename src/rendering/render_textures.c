@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pringles <pringles@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:43:47 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/09 10:43:40 by pringles         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:01:09 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ void	draw_textured_ray(t_image *img, t_rect rect, t_ray ray,
 	color_pos.y = 0;
 	get_texture(ray, textures, &texture, &color_pos.x);
 	tstep_y = texture.height / rect.size.y;
-	while (xy.y < rect.size.y && xy.y + rect.pos.y <= WIN_HEIGHT
-		&& xy.x + rect.pos.x <= WIN_WIDTH)
+	while (xy.y < (int)rect.size.y
+		&& xy.y + (int)rect.pos.y <= WIN_HEIGHT
+		&& xy.x + (int)rect.pos.x <= WIN_WIDTH)
 	{
 		xy.x = 0;
-		while (xy.x < rect.size.x && xy.y + rect.pos.y >= 0)
+		while (xy.x < (int)rect.size.x && xy.y + (int)rect.pos.y >= 0)
 		{
 			if (xy.x + rect.pos.x >= 0)
 				img_pix_put(img, (xy.x + rect.pos.x), (xy.y + rect.pos.y),

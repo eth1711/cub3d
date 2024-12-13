@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 14:19:20 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:08:35 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define DOF 20
 # define FOV 60
-# define RAYS 64
+# define RAYS 1920
 
 # ifdef __APPLE__
 
