@@ -1,10 +1,10 @@
-NO /home/amaligno/Projects/cub3d/textures/cat_32.xpm
-SO /home/amaligno/Projects/cub3d/textures/funny_me.xpm
-EA     /home/amaligno/Projects/cub3d/textures/mario.xpm
-WE  /home/amaligno/Projects/cub3d/textures/funny.xpm
+NO ./textures/cat_32.xpm
+SO ./textures/funny_me.xpm
+EA   ./textures/mario.xpm
+WE  ./textures/me_logo.xpm
+
 F 3,173,252
 C 78,252,3
-
 
 11111111
 11E000001
