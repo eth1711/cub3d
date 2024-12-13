@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 14:35:12 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:43:09 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
 # define WALL_SIZE 32
-# define MMAP_RATIO 25
+# define MMAP_RATIO 50
 // # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_WIDTH
 
 # define PLAYER_HITBOX 0.6
@@ -39,7 +39,7 @@
 # define PLAYER_SIZE 9
 # define DEGREE_IN_RADIANS 0.0174533
 
-# define DOF 20
+# define DOF 100000
 # define FOV 60
 # define RAYS 1920
 
