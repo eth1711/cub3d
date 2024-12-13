@@ -6,7 +6,7 @@
 /*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:03:01 by etlim             #+#    #+#             */
-/*   Updated: 2024/12/13 00:22:06 by amaligno         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:45:09 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ char	**parser(char *map, t_paths *nsewfc)
 		exit_error("Couldn't open map!\n");
 	str = str_alloc(fd, str_check(fd, nsewfc));
 	str2 = ft_split(str, '\n');
-	printf("map: \n");
-	for (int i = 0; str2[i]; i++)
-		printf("%s\n", str2[i]);
 	check_map(str2);
 	while (str2[i])
 		free(str2[i++]);
