@@ -34,7 +34,7 @@
 
 ## 🚀 Getting Started
 
-### Download latest
+### Download from [latest](https://github.com/eth1711/cub3d/releases/latest)
 
 ### Or
 
