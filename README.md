@@ -34,14 +34,16 @@
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Download latest
 
+### Or
+
+### Compile from source
+#### Prerequisites
 - **GCC** compiler
 - **Make**
 - **MiniLibX** library (included for Linux/macOS)
 - **X11** development libraries (Linux only)
-
-### Installation
 
 1. **Clone the repository**
 ```bash
@@ -54,12 +56,12 @@ cd cub3d
 make
 ```
 
-3. **Run the game**
-```bash
-./cub3D maps/example.cub
-```
-
 ## 🎲 Usage
+
+### Running the game
+```bash
+./cub3d maps/maze.cub
+```
 
 ### Controls
 - **W, A, S, D** - Move forward, left, backward, right
