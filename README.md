@@ -2,7 +2,7 @@
 
 <div align="center">
   
-<!-- ![cub3D Demo](assets/demo.gif) -->
+<img src="assets/cub3d.gif" height =500px> </img>  
 *A retro-style 3D maze game built with raycasting*
 
 [![42 School](https://img.shields.io/badge/School-000000?style=flat-square&logo=42&logoColor=white)](https://42.fr/)
