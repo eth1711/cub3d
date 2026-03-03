@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaligno <amaligno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaligno <amaligno@42.edu.my>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:28:52 by amaligno          #+#    #+#             */
-/*   Updated: 2024/12/13 18:08:35 by amaligno         ###   ########.fr       */
+/*   Updated: 2026/03/03 01:38:52 by amaligno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // 1920 x 1080
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define WALL_SIZE 32
+# define WALL_SIZE 16
 # define MMAP_RATIO 25
 // # define MMAP_SIZE (MMAP_RATIO * 0.01) * WIN_WIDTH
 

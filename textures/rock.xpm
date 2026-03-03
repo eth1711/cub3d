@@ -1,0 +1,27 @@
+/* XPM */
+static const char *rock[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 5 1 ",
+"  c #181425",
+". c #262B44",
+"X c #3A4466",
+"o c #4C5A78",
+"O c #5A6988",
+/* pixels */
+" .XX ....      .",
+"..XXX .. XXXXXO ",
+"..XXXX  XXXXXXXO",
+"..XXXX .XXXXXXXO",
+"      ..XXXXXXo ",
+"OOOO  ..XXXXXo X",
+"XXXXO ..XXXXo .X",
+"XXXXXO .XXXo ..X",
+"XXXXXXO .XX  ..X",
+"XXXXXXXO      .X",
+"XXXXXXXO .ooOO X",
+"XXXXXXo .XXXXXO ",
+"XXXXXo ..XXXXXXO",
+"OXXXX ...XXXXXXX",
+"o... .....XXXXXX",
+"     ......XXXXo"
+};

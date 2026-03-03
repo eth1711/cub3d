@@ -1,0 +1,26 @@
+/* XPM */
+static const char *cobblestone[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1 ",
+"  c #181425",
+". c #262B44",
+"X c #3A4466",
+"o c #5A6988",
+/* pixels */
+"oooo.ooo.XooX..X",
+"XooX.Xoo .XX.oo.",
+".XX...XX .. oooo",
+". .ooX..ooX.oooo",
+".Xoooo.ooooXoooo",
+".XooXX.ooooXXooX",
+". .XooXooXX. XX.",
+"oX.ooooXXooo. .o",
+"oo.oooo.ooooo.oo",
+"oo.XoooXoooooXoo",
+"Xoo.XXX.XoooX..X",
+"oooo..ooX.XX.oo.",
+"XooXXoooo ..oooo",
+"XXX.Xoooo.ooXooo",
+"XooX.XXoXooooXoo",
+"oooo.ooX.oooo.XX"
+};

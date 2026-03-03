@@ -1,0 +1,28 @@
+/* XPM */
+static const char *dirt[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c #5B3335",
+". c #733E39",
+"X c #914335",
+"o c #9B553D",
+"O c #A96447",
+"+ c #D77643",
+/* pixels */
+".......o+ooo....",
+"...o...oOooo..o.",
+"...o...XoooX....",
+"oo..o.. XXX ..oo",
+"ooo.....   ..o+O",
+"ooX..........XOO",
+"XX .......... XX",
+"  ...Xo.......  ",
+"..........o.....",
+"o.........o....X",
+"..ooo......o....",
+".o+Ooo..........",
+".ooooo..........",
+".XoooX..ooo....X",
+". XXX .ooOoo....",
+"..   ..oOooo...."
+};
