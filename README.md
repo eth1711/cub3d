@@ -131,6 +131,10 @@ Through this project, we gained hands-on experience with:
 
 This project is part of the 42 School curriculum and follows the school's academic guidelines.
 
+## 👤 Credit
+
+Art assets from https://piiixl.itch.io/textures
+
 ## 🤝 Contributing
 
 As this is an academic project, direct contributions are not accepted. However, feel free to:
