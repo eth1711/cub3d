@@ -25,7 +25,7 @@
 
 ## 🎮 Features
 
-- ✨ **Real-time 3D rendering** using raycasting techniques
+- ✨ **Real-time 2D rendering** using raycasting techniques
 - 🕹️ **Smooth player movement** with WASD controls
 - 🖱️ **Mouse look** horizontal movement only
 - 🧱 **Textured walls** with support for different textures per direction (North, South, East, West)
